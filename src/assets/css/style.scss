@@ -39,10 +39,181 @@ body {
         }
     }
 
+    // .table {
+    //     width: 20%;
+    //     border: 2px solid #f02d0b;
+    //     height: 100vh;
+    // }
+
+    /* ALEXEY TABLE */
+
+    $fz12: 0.67rem;
+$fz16: 0.89rem;
+$fz20: 1.11rem;
+$fz24: 1.33rem;
+$fz28: 1.56rem;
+$fz36: 2rem;
+$fz48: 2.7rem;
+
+$title-color-for-death: #e9ebdc;
+$color-for-death: #9698a8;
+$color-for-recovered: #0bf03d;
+$color-for-tests: #06a7d8;
+$color-white: #ffffff;
+$stat-color: #ebcbcb;
+
     .table {
+        padding: 0.56rem 0.56rem;
         width: 20%;
         border: 2px solid #f02d0b;
-        height: 100vh;
+        display: flex;
+        color: $title-color-for-death;
+        font-weight: normal;
+
+        .global-death {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .global-title {
+                font-size: $fz12;
+                text-align: center;
+            }
+            .amount-global-death {
+                text-align: center;
+                color: #f00b0b;
+            }
+
+            .checkbox-wrapper {
+                font-size: $fz12;
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0;
+
+                .radio-single {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .radio-btn {
+                        display: none;
+                    }
+
+                    .style-radio-btn {
+                        width: 0.7rem;
+                        height: 0.7rem;
+                        border: 2px solid #ffffff;
+                        background: #999;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
+
+                    .radio-btn:checked + .style-radio-btn {
+                        background-color: #f00b0b;
+                    }
+                }
+            }
+
+            .switch-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 0.28rem;
+
+                .btn-changes {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    background: none;
+                    border: 2px solid #9698a8;
+                    color: #9698a8;
+                    font-size: $fz20;
+                    outline: none;
+                    cursor: pointer;
+                    transition: 0.3s linear;
+
+                    &:hover {
+                        background: rgba(129, 123, 123, 0.534);
+                        color: #000000;
+                        border-color: #000000;
+                    }
+                }
+
+                .title-current-category {
+                    font-size: $fz16;
+                    color: $color-for-death;
+                }
+            }
+
+            .total-death-wrapper {
+                overflow: scroll;
+                overflow-x: hidden;
+                &::-webkit-scrollbar {
+                    width: 0.56rem;
+                }
+                &::-webkit-scrollbar-track {
+                    background-color: #999;
+                }
+                &::-webkit-scrollbar-thumb {
+                    height: 1.11rem;
+                    background-color: #666;
+                }
+
+                
+                .total-wrapper-d-c-r {
+                    order: 1;
+                    cursor: pointer;
+                    border-top: 1px solid #666;
+                    margin: 0.28rem 0;
+                    &:first-child {
+                        border-top: none;
+                    }
+
+                    .text-style-for-confirmed {
+                        color: #f00b0b;
+                    }
+    
+                    .text-style-for-death {
+                        color: $color-for-death;
+                    }
+    
+                    .text-style-for-recovered {
+                        color: #0bf03d;
+                    }
+
+                    .total-item {
+                        display: flex;
+
+                        .country-in-table {
+                            color: #ffffff;
+                        }
+                        p {
+                            padding-right: 0.56rem;   
+                        }
+
+                        .total-death-for-country {
+                            color: #ffffff;
+                        }
+            
+                        .total-confirmed-country {
+                            color: #f00b0b;
+                        }
+            
+                        .total-recovered-country {
+                            color: #0bf03d;
+                        }
+                    }
+
+                    
+                }
+                
+            }
+
+            
+        }
     }
+
+    
+
+
+
 
 }
