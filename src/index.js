@@ -1,5 +1,5 @@
 import "./assets/css/style.scss";
-import { BaseMarkup, getJSON } from "./modules/index";
+import { BaseMarkup, getJSON } from "./components/index";
 
 const markup = new BaseMarkup();
 
