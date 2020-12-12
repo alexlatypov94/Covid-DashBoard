@@ -1,4 +1,4 @@
-import { chartTemplate } from "./chart.template";
+import { chartTemplate, countryTemplate } from "./chart.template";
 
 export class Chart {
     log(data) {
@@ -11,26 +11,20 @@ export class Chart {
     }
 
     render(data) {
-        const sortDataCountries = data.sort((a, b) => (b.totalConfirmed > a.totalConfirmed ? 1 : -1));
-
+        const sortDataCountries = data.sort((a, b) => (b.totalCases > a.totalCases ? 1 : -1));
         const chart = document.querySelector(".countries-wrapper");
+
         sortDataCountries.forEach((item) => {
             chart.insertAdjacentHTML(
                 "beforeend",
-                `
-							  <li class ="country-wrapper" data-country ="${item.code}">
-									<span><img class="flag" src="${item.flag}"></span>
-									<span class="country-list-country-name">${item.country}</span>
-									<span class="country-list-value ">${item.totalConfirmed}</span>
-								</li>
-		`
+                countryTemplate(item.countryInfo.iso3, item.countryInfo.flag, item.country, item.totalCases)
             );
         });
     }
 
     serch() {
-        const input = document.querySelector(".country-input");
-        const filter = input.value.toUpperCase();
+        const searchField = document.querySelector(".country-input");
+        const filter = searchField.value.toUpperCase();
         const elements = document.querySelectorAll(".country-wrapper");
 
         for (let i = 0; i < elements.length; i += 1) {

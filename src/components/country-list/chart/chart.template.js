@@ -5,12 +5,13 @@ export const chartTemplate = `
 <input class="country-input" placeholder="Search...">
 <div class ="country-keyboard"></div>
 </div>
-
 `;
-export const countryTemplate = `
-<li class ="country-wrapper">
-	<span class="country-list-country-name last-country"></span>
-	<span class="country-list-value last-value"></span>
+export const countryTemplate = (countryCode, countryFlag, country, categoryName) => {
+    return `
+<li class ="country-wrapper" data-country ="${countryCode}">
+	<span><img class="flag" src="${countryFlag}"></span>
+	<span class="country-list-country-name">${country}</span>
+	<span class="country-list-value ">${categoryName}</span>
 </li>
 `;
-// <span class="country-list-flag last-flag"></span>
+};
