@@ -1,17 +1,17 @@
 export const globalTableTemplate = `
-            <div class = "global-death">
-                <h6 class = "global-title">Global case</h6>
-                <h1 class = "amount-global-death">Global death</h1>
+            <div class = "global-table">
+                <h6 class = "global-table-title">Global case</h6>
+                <h1 class = "amount-global-case"></h1>
                 <form class = "checkbox-wrapper">
                     <div class = "radio-single">
-                        <label for = "check-global-death" data-attribute = "Total">General</label>
+                        <label for = "check-global-death" data-attribute = "total">General</label>
                         <input type = "radio" name = "global-table" class = "radio-btn" id = "check-global-death" checked>
-                        <label for = "check-global-death" class = "style-radio-btn" data-attribute = "Total"></label>
+                        <label for = "check-global-death" class = "style-radio-btn" data-attribute = "total"></label>
                     </div>
                    <div class = "radio-single">
-                        <label for = "check-global-received" data-attribute = "New">day</label>
+                        <label for = "check-global-received" data-attribute = "new">day</label>
                         <input type = "radio" name = "global-table" class = "radio-btn" id = "check-global-received"> 
-                        <label for = "check-global-received" class = "style-radio-btn" data-attribute = "New"></label>
+                        <label for = "check-global-received" class = "style-radio-btn" data-attribute = "new"></label>
                    </div>
                     <div class = "radio-single">
                         <label for = "death-hundreed" data-attribute = "General-hundreed">General / 100</label>
@@ -25,7 +25,7 @@ export const globalTableTemplate = `
                     </div>
                       
                 </form>
-                <div class = "total-death-wrapper"></div>
+                <div class = "total-case-wrapper"></div>
                 <div class = "switch-wrapper">
                     <button type = "button" class = "btn-changes left-change"><</button>
                     <span class = "title-current-category">Global Death</span>

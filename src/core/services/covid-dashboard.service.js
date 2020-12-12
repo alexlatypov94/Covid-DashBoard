@@ -52,4 +52,16 @@ export class CovidDashboardService {
     getDayOne(countryName) {
         return this.apiService.getDayOne(countryName).then((res) => mapDayOneCountry(res));
     }
+
+    getFlagsAndPopulations() {
+        return this.apiService.getFlagPopulations().then((res) => {
+            return res?.map((data) => {
+                return {
+                    flag: data?.flag,
+                    name: data?.name,
+                    population: data?.population
+                }
+            })
+        })
+    }
 }
