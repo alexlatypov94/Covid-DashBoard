@@ -52,7 +52,14 @@ const config = {
             {
                 test: /\.js$/,
                 use: ["babel-loader" /* , 'eslint-loader' */],
-                exclude: [/node_modules/]
+                exclude: [/node_modules/],
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env"],
+                        plugins: ["@babel/plugin-proposal-class-properties"]
+                    }
+                }
             },
             {
                 test: /\.css$/,
