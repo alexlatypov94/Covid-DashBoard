@@ -11,7 +11,7 @@ export const URL = {
 
 export const API_URL_FLAGS_POPULATION = "https://restcountries.eu/rest/v2/all?fields=name;population;flag";
 
-export const COUNTRIES = "https://corona.lmao.ninja/v2/countries"
+export const COUNTRIES = "https://corona.lmao.ninja/v2/countries";
 
 export const ONE_HUNDREED = 100000;
 
