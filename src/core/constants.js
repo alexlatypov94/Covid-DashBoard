@@ -8,3 +8,8 @@ export const URL = {
     DAYONE: "dayone",
     STATUS: "status"
 };
+
+export const API_URL_FLAGS_POPULATION = "https://restcountries.eu/rest/v2/all?fields=name;population;flag"
+
+
+

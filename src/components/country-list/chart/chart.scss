@@ -1,0 +1,19 @@
+.flag{
+	width: 20px;
+	height: 10px;
+
+}
+.countries-wrapper{
+	height: calc(100vh-100px);
+	overflow-y: scroll;
+}
+.country-search{
+	display: flex;
+
+}
+.country-keyboard{
+	width: 10%;
+	height: 20px;
+	background-color: white;
+	margin: 0 5px;
+}
