@@ -1,16 +1,16 @@
 export const chartTemplate = `
 <div class = "country-list-title">title</div>
-<div class ="countries-wrapper"></div>
+<ul class ="countries-wrapper"></ul>
 <div class ="country-search">
-<input class="country-input">
+<input class="country-input" placeholder="Search...">
 <div class ="country-keyboard"></div>
 </div>
 
-`
-export const countryTemplate =`
-<div class ="country-wrapper">
-	<span class="country-list-flag last-flag"></span>
+`;
+export const countryTemplate = `
+<li class ="country-wrapper">
 	<span class="country-list-country-name last-country"></span>
 	<span class="country-list-value last-value"></span>
-</div>
-`
+</li>
+`;
+// <span class="country-list-flag last-flag"></span>
