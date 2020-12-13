@@ -64,4 +64,36 @@ export class CovidDashboardService {
             })
         })
     }
+
+    getCountriesCoordinate() {
+        return this.apiService.getApiCountries().then((res) => {
+            return res?.map((data) => {
+                return {
+                    updated: data?.updated,
+                    country: data?.country,
+                    countryInfo: data?.countryInfo,
+                    cases: data?.cases,
+                    todayCases: data?.todayCases,
+                    deaths: data?.deaths,
+                    todayDeaths: data?.todayDeaths,
+                    recovered: data?.recovered,
+                    todayRecovered: data?.todayRecovered,
+                    active: data?.active,
+                    critical: data?.critical,
+                    casesPerOneMillion: data?.casesPerOneMillion,
+                    deathsPerOneMillion: data?.deathsPerOneMillion,
+                    tests: data?.tests,
+                    testsPerOneMillion: data?.testsPerOneMillion,
+                    population: data?.population,
+                    continent: data?.continent,
+                    oneCasePerPeople: data?.oneCasePerPeople,
+                    oneDeathPerPeople: data?.oneDeathPerPeople,
+                    oneTestPerPeople: data?.oneTestPerPeople,
+                    activePerOneMillion: data?.activePerOneMillion,
+                    recoveredPerOneMillion: data?.recoveredPerOneMillion,
+                    criticalPerOneMillion: data?.criticalPerOneMillion
+                }
+            })
+        })
+    }
 }

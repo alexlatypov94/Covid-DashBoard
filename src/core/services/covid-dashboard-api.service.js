@@ -1,4 +1,4 @@
-import { API_URL, URL, API_URL_FLAGS_POPULATION } from "../constants";
+import { API_URL, URL, API_URL_FLAGS_POPULATION, COUNTRIES } from "../constants";
 
 /**
  * COVID19 API Service
@@ -25,6 +25,12 @@ export class CovidDashBoardApiService {
 
     getFlagPopulations() {
         return fetch(`${API_URL_FLAGS_POPULATION}`)
+            .then((res) => this.getStatus(res))
+            .catch((err) => err)
+    }
+
+    getApiCountries() {
+        return fetch(`${COUNTRIES}`)
             .then((res) => this.getStatus(res))
             .catch((err) => err)
     }

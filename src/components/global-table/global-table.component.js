@@ -1,6 +1,6 @@
-import { globalTableTemplate } from "./global-table.template";
-import { CovidDashboardService } from "../../core/index";
-import { ONE_HUNDREED } from "../../core/constants";
+import { CovidDashboardService, ONE_HUNDREED, COLOR_PALETTE } from "../../core/index";
+import { sortData } from "./utils/index";
+import { globalTableTemplate, totalCaseWrapperTemplate, radioButton } from "./global-table.template";
 
 export class GlobalTable {
     constructor() {
@@ -12,135 +12,172 @@ export class GlobalTable {
         this.totalDeath = "item-death-color";
         this.totalRecovered = "item-recovered-color";
 
+        this.counterForSwitch = 0;
         this.titleForCases = "cases";
         this.titleCurrentCategory = "cases";
-
-        this.counterForSwitch = 0;
 
         this.checkDataPopulations = false;
     }
 
     init() {
-        this.service.getSummary().then((data) => this.initTableInfo(data, this.totalConfirmed));
-        this.render();
-    }
-
-    render() {
         const table = document.querySelector(".table");
-        table.insertAdjacentHTML("beforeend", globalTableTemplate);
+        table.insertAdjacentHTML("beforeend", radioButton);
+        this.service.getSummary().then((data) => this.renderAndListen(data));
     }
 
-    initTableInfo(data, colorForTotal, dataPopulation) {
-        const titleCurrentCategory = document.querySelector(".title-current-category");
-        const globalTitleTable = document.querySelector(".global-table-title");
-        const amountGlobalCase = document.querySelector(".amount-global-case");
-        const dataWrapper = document.querySelector(".total-case-wrapper");
-        const globalTableWrapper = document.querySelector(".global-table");
-        const sortedData = data.countries.sort((a, b) => (a[this.param] > b[this.param] ? -1 : 1));
+    async renderAndListen(data, color, population) {
+        await this.render(data, color, population);
+        this.addEventListeners(data);
+    }
 
-        titleCurrentCategory.innerText = `Global ${this.titleCurrentCategory}`;
-        globalTitleTable.innerText = `Global ${this.titleCurrentCategory}`;
-        amountGlobalCase.innerText = data.global[this.param];
-       
-        sortedData.forEach((element) => {
+    render(data, color, population) {
+        const globalTable = document.querySelector(".global-table");
+        const categoryName = `Global ${this.titleCurrentCategory}`;
+        const tableName = `Global ${this.titleCurrentCategory}`;
+        const globalAmount = data?.global?.[this.param];
+
+        globalTable.innerHTML = "";
+        globalTable.insertAdjacentHTML(
+            "beforeend",
+            globalTableTemplate(categoryName, tableName, globalAmount, color || this.totalConfirmed)
+        );
+
+        const dataWrapper = document.querySelector(".total-case-wrapper");
+
+        sortData(data?.countries, this.param)?.forEach((element) => {
             let checkPopulations = 0;
-            if(dataPopulation) {
-                dataPopulation.forEach((el) => {
-                    if(element.country === el.name) {
-                        checkPopulations = element[this.param] / el.population * ONE_HUNDREED
-                    }
-                })
-            }
-            
+            population?.forEach((el) => {
+                if (element.country === el.name) {
+                    checkPopulations = ((element[this.param] / el.population) * ONE_HUNDREED).toFixed(3);
+                }
+            });
+
             dataWrapper.insertAdjacentHTML(
                 "beforeend",
-                `
-            <div class = "table-item">
-                <div class = "${colorForTotal}"><span class = "total-number">${checkPopulations || element[this.param]}</span> ${
-                    this.titleForCases
-                }</div>
-                <span class = "country-style">${element.country}</span>
-            </div>
-        `
+                totalCaseWrapperTemplate(
+                    color || this.totalConfirmed,
+                    checkPopulations || element?.[this.param],
+                    this.titleForCases,
+                    element?.country
+                )
             );
         });
 
-        globalTableWrapper.addEventListener("click", (event) => {
-            if (event.target.closest(".btn-changes")) {
-                event.stopImmediatePropagation();
-                dataWrapper.innerHTML = "";
-                
-                this.service
-                .getFlagsAndPopulations()
-                .then((dataPopulations) => this.onSwithStatistics(event, data, amountGlobalCase, dataPopulations));
-            }
+        return data;
+    }
 
-            if (event.target.closest("label")) {
-                event.stopImmediatePropagation();
-                dataWrapper.innerHTML = "";
+    addEventListeners(data) {
+        const table = document.querySelector(".table");
+        const amount = document.querySelector(".amount-global-case");
+
+        table.addEventListener("click", (event) => {
+            event.stopImmediatePropagation();
+
+            const isSwithOnStatistics = event.target.closest(".btn-changes") !== null;
+            const isRadioButtonClick = event.target.closest("label") !== null;
+
+            if (isSwithOnStatistics || isRadioButtonClick) {
                 this.service
                     .getFlagsAndPopulations()
-                    .then((dataPopulations) => this.onRadioButtonClick(event, data, amountGlobalCase, dataPopulations));
+                    .then((dataPopulations) =>
+                        isSwithOnStatistics
+                            ? this.onSwithStatistics(event, data, amount, dataPopulations)
+                            : this.onRadioButtonClick(event, data, amount, dataPopulations)
+                    );
             }
         });
     }
 
-    onSwithStatistics(event, data, amountGlobalCase, dataPopulations) {
-        const newAmountGlobalCase = amountGlobalCase;
-        event.target.closest(".left-change") ? (this.counterForSwitch -= 1) : (this.counterForSwitch += 1);
+    onSwithStatistics(event, data, amount, populations) {
+        const newAmount = amount;
+        let counter;
 
-        if (this.counterForSwitch > 2) {
-            this.counterForSwitch = 0;
-        }
-        if (this.counterForSwitch < 0) {
-            this.counterForSwitch = 2;
+        event.target.closest(".left-change")
+            ? (counter = this.counterForSwitch - 1)
+            : (counter = this.counterForSwitch + 1);
+
+        if (counter > 2) {
+            counter = 0;
+        } else if (counter < 0) {
+            counter = 2;
         }
 
-        if (this.counterForSwitch === 0) {
-            newAmountGlobalCase.style.color = "#f00b0b";
-            this.titleCurrentCategory = "cases";
-            this.param = `${this.paramNewOrTotal}Confirmed`;
-            this.titleForCases = "case";
-            this.checkDataPopulations ? this.initTableInfo(data, this.totalConfirmed, dataPopulations) : this.initTableInfo(data, this.totalConfirmed);
-        } else if (this.counterForSwitch === 1) {
-            newAmountGlobalCase.style.color = "#9698a8";
-            this.titleCurrentCategory = "death";
-            this.param = `${this.paramNewOrTotal}Deaths`;
-            this.titleForCases = "death";
-            this.checkDataPopulations ? this.initTableInfo(data, this.totalDeath, dataPopulations) : this.initTableInfo(data, this.totalDeath);
-        } else {
-            newAmountGlobalCase.style.color = "#0bf03d";
-            this.titleCurrentCategory = "recovered";
-            this.titleForCases = "recovered";
-            this.param = `${this.paramNewOrTotal}Recovered`;
-            this.checkDataPopulations ? this.initTableInfo(data, this.totalRecovered, dataPopulations) : this.initTableInfo(data, this.totalRecovered);
+        switch (counter) {
+            case 0:
+                newAmount.style.color = COLOR_PALETTE.RED;
+                this.titleCurrentCategory = "cases";
+                this.param = `${this.paramNewOrTotal}Confirmed`;
+                this.titleForCases = "case";
+                this.checkDataPopulations
+                    ? this.renderAndListen(data, this.totalConfirmed, populations)
+                    : this.renderAndListen(data, this.totalConfirmed);
+                break;
+            case 1:
+                newAmount.style.color = COLOR_PALETTE.GREY;
+                this.titleCurrentCategory = "death";
+                this.param = `${this.paramNewOrTotal}Deaths`;
+                this.titleForCases = "death";
+                this.checkDataPopulations
+                    ? this.renderAndListen(data, this.totalDeath, populations)
+                    : this.renderAndListen(data, this.totalDeath);
+                break;
+            default:
+                newAmount.style.color = COLOR_PALETTE.GREEN;
+                this.titleCurrentCategory = "recovered";
+                this.titleForCases = "recovered";
+                this.param = `${this.paramNewOrTotal}Recovered`;
+                this.checkDataPopulations
+                    ? this.renderAndListen(data, this.totalRecovered, populations)
+                    : this.renderAndListen(data, this.totalRecovered);
+                break;
         }
+
+        this.counterForSwitch = counter;
     }
 
-    onRadioButtonClick(event, data, amountGlobalCase, dataPopulations) {
-        const newAmountGlobalCase = amountGlobalCase;
-        newAmountGlobalCase.style.color = "#f00b0b";
+    onRadioButtonClick(event, data, amount, populations) {
+        const newAmount = amount;
+        const dataAttribute = event.target.getAttribute("data-attribute");
+        newAmount.style.color = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
         this.titleForCases = "cases";
         this.titleCurrentCategory = "cases";
-        if (event.target.getAttribute("data-attribute") === "total") {
-            this.paramNewOrTotal = "total";
-            this.param = `${this.paramNewOrTotal}Confirmed`;
-            this.initTableInfo(data, this.totalConfirmed);
-        } else if (event.target.getAttribute("data-attribute") === "new") {
-            this.paramNewOrTotal = "new";
-            this.param = `${this.paramNewOrTotal}Confirmed`;
-            this.initTableInfo(data, this.totalConfirmed);
-        } else if (event.target.getAttribute("data-attribute") === "General-hundreed") {
-            this.paramNewOrTotal = "total";
-            this.param = `${this.paramNewOrTotal}Confirmed`;
-            this.checkDataPopulations = !this.checkDataPopulations
-            this.initTableInfo(data, this.totalConfirmed, dataPopulations);
-        } else {
-            this.paramNewOrTotal = "new";
-            this.param = `${this.paramNewOrTotal}Confirmed`;
-            this.checkDataPopulations = !this.checkDataPopulations
-            this.initTableInfo(data, this.totalConfirmed, dataPopulations);
+
+        switch (dataAttribute) {
+            case "total":
+                this.paramNewOrTotal = "total";
+                this.param = `${this.paramNewOrTotal}Confirmed`;
+                this.checkDataPopulations === false
+                    ? this.checkDataPopulations
+                    : (this.checkDataPopulations = !this.checkDataPopulations);
+                this.renderAndListen(data, this.totalConfirmed);
+                break;
+            case "new":
+                this.paramNewOrTotal = "new";
+                this.param = `${this.paramNewOrTotal}Confirmed`;
+                this.checkDataPopulations === false
+                    ? this.checkDataPopulations
+                    : (this.checkDataPopulations = !this.checkDataPopulations);
+                this.renderAndListen(data, this.totalConfirmed);
+                break;
+            case "General-hundreed":
+                this.paramNewOrTotal = "total";
+                this.param = `${this.paramNewOrTotal}Confirmed`;
+                this.checkDataPopulations === false
+                    ? (this.checkDataPopulations = !this.checkDataPopulations)
+                    : this.checkDataPopulations;
+                // this.checkDataPopulations = !this.checkDataPopulations;
+                this.renderAndListen(data, this.totalConfirmed, populations);
+                break;
+            default:
+                this.paramNewOrTotal = "new";
+                this.param = `${this.paramNewOrTotal}Confirmed`;
+                this.checkDataPopulations === false
+                    ? (this.checkDataPopulations = !this.checkDataPopulations)
+                    : this.checkDataPopulations;
+                // this.checkDataPopulations = !this.checkDataPopulations;
+                this.renderAndListen(data, this.totalConfirmed, populations);
+                break;
         }
     }
 }

@@ -47,7 +47,13 @@ body {
 
     /* ALEXEY TABLE */
 
-    h1, h2, h3, h4, h5, h6, p {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
         margin: 0;
         padding: 0;
     }
@@ -74,48 +80,63 @@ body {
         display: flex;
         color: $title-color-for-death;
         font-weight: normal;
+        display: flex;
+        flex-direction: column;
+
+        .checkbox-wrapper {
+            font-size: $fz12;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+
+            .radio-single {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .radio-btn {
+                    display: none;
+                }
+
+                .style-radio-btn {
+                    width: 0.7rem;
+                    height: 0.7rem;
+                    border: 2px solid #ffffff;
+                    background: #999;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+
+                .radio-btn:checked + .style-radio-btn {
+                    background-color: #f00b0b;
+                }
+            }
+        }
 
         .global-table {
             width: 100%;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             .global-table-title {
                 font-size: $fz12;
                 text-align: center;
             }
             .amount-global-case {
                 text-align: center;
+                // color: #f00b0b;
+            }
+
+            .item-confirmed-color {
                 color: #f00b0b;
             }
 
-            .checkbox-wrapper {
-                font-size: $fz12;
-                display: flex;
-                justify-content: space-between;
-                margin: 10px 0;
+            .item-death-color {
+                color: #9698a8;
+            }
 
-                .radio-single {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    .radio-btn {
-                        display: none;
-                    }
-
-                    .style-radio-btn {
-                        width: 0.7rem;
-                        height: 0.7rem;
-                        border: 2px solid #ffffff;
-                        background: #999;
-                        border-radius: 50%;
-                        cursor: pointer;
-                    }
-
-                    .radio-btn:checked + .style-radio-btn {
-                        background-color: #f00b0b;
-                    }
-                }
+            .item-recovered-color {
+                color: #0bf03d;
             }
 
             .switch-wrapper {
@@ -183,8 +204,6 @@ body {
                 .item-recovered-color {
                     color: #0bf03d;
                 }
-
-                
             }
         }
     }
