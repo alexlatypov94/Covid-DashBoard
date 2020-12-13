@@ -20,7 +20,6 @@ export class CountryList {
         this.chart.render(data);
 
         const input = document.querySelector(".country-input");
-
         input.addEventListener("keyup", () => {
             this.chart.serch();
         });
