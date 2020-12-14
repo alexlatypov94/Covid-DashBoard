@@ -60,9 +60,9 @@ export class CovidDashboardService {
                     flag: data?.flag,
                     name: data?.name,
                     population: data?.population
-                }
-            })
-        })
+                };
+            });
+        });
     }
 
     getCountriesCoordinate() {
@@ -92,8 +92,8 @@ export class CovidDashboardService {
                     activePerOneMillion: data?.activePerOneMillion,
                     recoveredPerOneMillion: data?.recoveredPerOneMillion,
                     criticalPerOneMillion: data?.criticalPerOneMillion
-                }
-            })
-        })
+                };
+            });
+        });
     }
 }

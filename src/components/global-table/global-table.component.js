@@ -22,7 +22,7 @@ export class GlobalTable {
     init() {
         const table = document.querySelector(".table");
         table.insertAdjacentHTML("beforeend", radioButton);
-        
+
         this.service.getCountriesCoordinate().then((data) => this.renderAndListen(data));
     }
 
@@ -31,13 +31,7 @@ export class GlobalTable {
         this.addEventListeners(data);
     }
 
-    
-
     render(data, color) {
-        this.service.getSummary().then((dataTitle) => this.renderTitle(dataTitle, color));
-        
-        const dataWrapper = document.querySelector(".total-case-wrapper");
-
         let sortObject = [];
 
         const sortOfPopulation = updateDataForHundreed(data, this.param);
@@ -45,6 +39,19 @@ export class GlobalTable {
         !this.checkDataPopulations
             ? (sortObject = sortData(data, this.param))
             : (sortObject = sortData(sortOfPopulation, this.param));
+
+        const globalTable = document.querySelector(".global-table");
+        const categoryName = `Global ${this.titleCurrentCategory}`;
+        const tableName = `Global ${this.titleCurrentCategory}`;
+        const globalAmount = +sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3);
+
+        globalTable.innerHTML = "";
+        globalTable.insertAdjacentHTML(
+            "beforeend",
+            globalTableTemplate(categoryName, tableName, globalAmount, color || this.totalConfirmed)
+        );
+
+        const dataWrapper = document.querySelector(".total-case-wrapper");
 
         sortObject.forEach((element) => {
             dataWrapper.insertAdjacentHTML(
@@ -59,20 +66,6 @@ export class GlobalTable {
         });
 
         return data;
-    }
-
-    renderTitle(data, color) {
-        const globalTable = document.querySelector(".global-table");
-        const categoryName = `Global ${this.titleCurrentCategory}`;
-        const tableName = `Global ${this.titleCurrentCategory}`;
-        const globalAmount = data?.global?.[this.param];
-        console.log(globalAmount)
-        globalTable.innerHTML = "";
-        globalTable.insertAdjacentHTML(
-            "beforeend",
-            globalTableTemplate(categoryName, tableName, globalAmount, color || this.totalConfirmed)
-        );
-
     }
 
     addEventListeners(data) {
