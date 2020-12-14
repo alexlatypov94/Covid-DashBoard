@@ -1,87 +1,96 @@
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0;
-}
+$global-table-fz12: 0.67rem;
+$global-table-fz16: 0.89rem;
+$global-table-fz20: 1.11rem;
+$global-table-fz24: 1.33rem;
+$global-table-fz28: 1.56rem;
+$global-table-fz36: 2rem;
+$global-table-fz48: 2.7rem;
 
-$fz12: 0.67rem;
-$fz16: 0.89rem;
-$fz20: 1.11rem;
-$fz24: 1.33rem;
-$fz28: 1.56rem;
-$fz36: 2rem;
-$fz48: 2.7rem;
-
-$title-color-for-death: #e9ebdc;
-$color-for-death: #9698a8;
-$color-for-recovered: #0bf03d;
-$color-for-tests: #06a7d8;
-$color-white: #ffffff;
-$stat-color: #ebcbcb;
+$global-table-title-color-for-death: #e9ebdc;
+$global-table-color-for-death: #9698a8;
+$global-table-color-for-recovered: #0bf03d;
+$global-table-color-for-case: #f00b0b;
+$global-table-color-white: #ffffff;
+$global-table-stat-color: #ebcbcb;
 
 .table {
     padding: 0.56rem 0.56rem;
     width: 20%;
     border: 2px solid #f02d0b;
     display: flex;
-    color: $title-color-for-death;
+    color: $global-table-title-color-for-death;
     font-weight: normal;
+    display: flex;
+    flex-direction: column;
+
+    .global-table-checkbox-wrapper {
+        font-size: $global-table-fz12;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+
+        .global-table-radio-single {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .global-table-radio-btn {
+                display: none;
+            }
+
+            .global-table-style-radio-btn {
+                width: 0.7rem;
+                height: 0.7rem;
+                border: 2px solid #ffffff;
+                background: #999;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .global-table-radio-btn:checked + .global-table-style-radio-btn {
+                background-color: $global-table-color-for-case;
+            }
+        }
+    }
 
     .global-table {
         width: 100%;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
         .global-table-title {
-            font-size: $fz12;
+            font-size: $global-table-fz12;
             text-align: center;
         }
-        .amount-global-case {
+        .global-table-amount-global-case {
             text-align: center;
-            color: #f00b0b;
         }
 
-        .checkbox-wrapper {
-            font-size: $fz12;
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-
-            .radio-single {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                .radio-btn {
-                    display: none;
-                }
-
-                .style-radio-btn {
-                    width: 0.7rem;
-                    height: 0.7rem;
-                    border: 2px solid #ffffff;
-                    background: #999;
-                    border-radius: 50%;
-                    cursor: pointer;
-                }
-
-                .radio-btn:checked + .style-radio-btn {
-                    background-color: #f00b0b;
-                }
-            }
+        .global-table-item-confirmed-color {
+            color: $global-table-color-for-case;
         }
 
-        .switch-wrapper {
+        .global-table-item-death-color {
+            color: $global-table-color-for-death;
+        }
+
+        .global-table-item-recovered-color {
+            color: $global-table-color-for-recovered;
+        }
+
+        .global-table-switch-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 0.28rem;
 
-            .btn-changes {
+            .global-table-btn-changes {
                 width: 1.5rem;
                 height: 1.5rem;
                 background: none;
                 border: 2px solid #9698a8;
-                color: #9698a8;
-                font-size: $fz20;
+                color: $global-table-color-for-death;
+                font-size: $global-table-fz20;
                 outline: none;
                 cursor: pointer;
                 transition: 0.3s linear;
@@ -93,13 +102,13 @@ $stat-color: #ebcbcb;
                 }
             }
 
-            .title-current-category {
-                font-size: $fz16;
-                color: $color-for-death;
+            .global-table-title-current-category {
+                font-size: $global-table-fz16;
+                color: $global-table-color-for-death;
             }
         }
 
-        .total-case-wrapper {
+        .global-table-total-case-wrapper {
             overflow: scroll;
             overflow-x: hidden;
             &::-webkit-scrollbar {
@@ -113,8 +122,8 @@ $stat-color: #ebcbcb;
                 background-color: #666;
             }
 
-            .table-item {
-                border-top: 2px solid #9698a8;
+            .global-table-table-item {
+                border-top: 2px solid $global-table-color-for-death;
                 padding: 10px 0;
                 cursor: pointer;
 
@@ -123,20 +132,17 @@ $stat-color: #ebcbcb;
                 }
             }
 
-            .item-confirmed-color {
-                color: #f00b0b;
+            .global-table-item-confirmed-color {
+                color: $global-table-color-for-case;
             }
 
-            .item-death-color {
-                color: #9698a8;
+            .global-table-item-death-color {
+                color: $global-table-color-for-death;
             }
 
-            .item-recovered-color {
-                color: #0bf03d;
+            .global-table-item-recovered-color {
+                color: $global-table-color-for-recovered;
             }
-
-            
         }
     }
 }
-

@@ -5,11 +5,11 @@ export function sortData(data, parameter) {
 }
 
 export function updateDataForHundreed(data, param) {
-    return data.map((element, index) => {
+    return data?.map((element, index) => {
         return {
             ...element,
             ...element[index],
-            [param]: element.population === 0 ? 0 : +((element[param] / element.population) * ONE_HUNDREED).toFixed(3)
+            [param]: element.population === 0 ? 0 : Number(((element[param] / element.population) * ONE_HUNDREED).toFixed(3))
         };
     });
 }

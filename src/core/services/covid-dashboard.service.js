@@ -65,7 +65,7 @@ export class CovidDashboardService {
         });
     }
 
-    getFullInformationCounty() {
+    getFullInformationCountry() {
         return this.apiService.getApiCountries().then((res) => {
             return res?.map((data) => {
                 return {

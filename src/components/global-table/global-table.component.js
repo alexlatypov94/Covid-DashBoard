@@ -8,13 +8,13 @@ export class GlobalTable {
         this.paramNewOrTotal = "total";
         this.param = `${this.paramNewOrTotal}Cases`;
 
-        this.totalConfirmed = "item-confirmed-color";
-        this.totalDeath = "item-death-color";
-        this.totalRecovered = "item-recovered-color";
+        this.totalConfirmed = "global-table-item-confirmed-color";
+        this.totalDeath = "global-table-item-death-color";
+        this.totalRecovered = "global-table-item-recovered-color";
 
         this.counterForSwitch = 0;
-        this.titleForCases = "cases";
-        this.titleCurrentCategory = "cases";
+        this.titleForCases = "сases";
+        this.titleCurrentCategory = "сases";
 
         this.checkDataPopulations = false;
     }
@@ -23,7 +23,7 @@ export class GlobalTable {
         const table = document.querySelector(".table");
         table.insertAdjacentHTML("beforeend", radioButton);
 
-        this.service.getFullInformationCounty().then((data) => this.renderAndListen(data));
+        this.service.getFullInformationCountry().then((data) => this.renderAndListen(data));
     }
 
     async renderAndListen(data, color) {
@@ -32,18 +32,15 @@ export class GlobalTable {
     }
 
     render(data, color) {
-        let sortObject = [];
-
         const sortOfPopulation = updateDataForHundreed(data, this.param);
-
-        !this.checkDataPopulations
-            ? (sortObject = sortData(data, this.param))
-            : (sortObject = sortData(sortOfPopulation, this.param));
+        const sortObject = !this.checkDataPopulations
+            ? sortData(data, this.param)
+            : sortData(sortOfPopulation, this.param);
 
         const globalTable = document.querySelector(".global-table");
         const categoryName = `Global ${this.titleCurrentCategory}`;
         const tableName = `Global ${this.titleCurrentCategory}`;
-        const globalAmount = +sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3);
+        const globalAmount = Number(sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3));
 
         globalTable.innerHTML = "";
         globalTable.insertAdjacentHTML(
@@ -51,7 +48,7 @@ export class GlobalTable {
             globalTableTemplate(categoryName, tableName, globalAmount, color || this.totalConfirmed)
         );
 
-        const dataWrapper = document.querySelector(".total-case-wrapper");
+        const dataWrapper = document.querySelector(".global-table-total-case-wrapper");
 
         sortObject.forEach((element) => {
             dataWrapper.insertAdjacentHTML(
@@ -70,12 +67,12 @@ export class GlobalTable {
 
     addEventListeners(data) {
         const table = document.querySelector(".table");
-        const amount = document.querySelector(".amount-global-case");
+        const amount = document.querySelector(".global-table-amount-global-case");
 
         table.addEventListener("click", (event) => {
             event.stopImmediatePropagation();
 
-            const isSwithOnStatistics = event.target.closest(".btn-changes") !== null;
+            const isSwithOnStatistics = event.target.closest(".global-table-btn-changes") !== null;
             const isRadioButtonClick = event.target.closest("label") !== null;
 
             if (isSwithOnStatistics || isRadioButtonClick) {
@@ -105,28 +102,22 @@ export class GlobalTable {
                 newAmount.style.color = COLOR_PALETTE.RED;
                 this.titleCurrentCategory = "cases";
                 this.param = `${this.paramNewOrTotal}Cases`;
-                this.titleForCases = "case";
-                this.checkDataPopulations
-                    ? this.renderAndListen(data, this.totalConfirmed)
-                    : this.renderAndListen(data, this.totalConfirmed);
+                this.titleForCases = "cases";
+                this.renderAndListen(data, this.totalConfirmed);
                 break;
             case 1:
                 newAmount.style.color = COLOR_PALETTE.GREY;
                 this.titleCurrentCategory = "death";
                 this.param = `${this.paramNewOrTotal}Deaths`;
-                this.titleForCases = "death";
-                this.checkDataPopulations
-                    ? this.renderAndListen(data, this.totalDeath)
-                    : this.renderAndListen(data, this.totalDeath);
+                this.titleForCases = "deaths";
+                this.renderAndListen(data, this.totalDeath);
                 break;
             default:
                 newAmount.style.color = COLOR_PALETTE.GREEN;
                 this.titleCurrentCategory = "recovered";
                 this.titleForCases = "recovered";
                 this.param = `${this.paramNewOrTotal}Recovered`;
-                this.checkDataPopulations
-                    ? this.renderAndListen(data, this.totalRecovered)
-                    : this.renderAndListen(data, this.totalRecovered);
+                this.renderAndListen(data, this.totalRecovered);
                 break;
         }
 
@@ -145,7 +136,7 @@ export class GlobalTable {
             case "total":
                 this.paramNewOrTotal = "total";
                 this.param = `${this.paramNewOrTotal}Cases`;
-                this.checkDataPopulations === false
+                !this.checkDataPopulations
                     ? this.checkDataPopulations
                     : (this.checkDataPopulations = !this.checkDataPopulations);
                 this.renderAndListen(data, this.totalConfirmed);
@@ -153,15 +144,15 @@ export class GlobalTable {
             case "new":
                 this.paramNewOrTotal = "today";
                 this.param = `${this.paramNewOrTotal}Cases`;
-                this.checkDataPopulations === false
+                !this.checkDataPopulations
                     ? this.checkDataPopulations
                     : (this.checkDataPopulations = !this.checkDataPopulations);
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
-            case "General-hundreed":
+            case "general-hundreed":
                 this.paramNewOrTotal = "total";
                 this.param = `${this.paramNewOrTotal}Cases`;
-                this.checkDataPopulations === false
+                !this.checkDataPopulations
                     ? (this.checkDataPopulations = !this.checkDataPopulations)
                     : this.checkDataPopulations;
                 this.renderAndListen(data, this.totalConfirmed);
@@ -169,7 +160,7 @@ export class GlobalTable {
             default:
                 this.paramNewOrTotal = "today";
                 this.param = `${this.paramNewOrTotal}Cases`;
-                this.checkDataPopulations === false
+                !this.checkDataPopulations
                     ? (this.checkDataPopulations = !this.checkDataPopulations)
                     : this.checkDataPopulations;
                 this.renderAndListen(data, this.totalConfirmed);
