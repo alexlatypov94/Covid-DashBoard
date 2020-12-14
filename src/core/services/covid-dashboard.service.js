@@ -12,12 +12,12 @@ export class CovidDashboardService {
     getSummary() {
         return this.apiService.getSummary().then((res) => {
             const global = {
-                newConfirmed: res?.Global?.NewConfirmed,
-                newDeaths: res?.Global?.NewDeaths,
-                newRecovered: res?.Global?.NewRecovered,
-                totalConfirmed: res?.Global?.TotalConfirmed,
-                totalDeaths: res?.Global?.TotalDeaths,
-                totalRecovered: res?.Global?.TotalRecovered
+                todayCases: res?.Global?.NewConfirmed,
+                todayDeaths: res?.Global?.NewDeaths,
+                todayRecovered: res?.Global?.NewRecovered,
+                Cases: res?.Global?.TotalConfirmed,
+                Deaths: res?.Global?.TotalDeaths,
+                Recovered: res?.Global?.TotalRecovered
             };
 
             return {
@@ -72,11 +72,11 @@ export class CovidDashboardService {
                     updated: data?.updated,
                     country: data?.country,
                     countryInfo: data?.countryInfo,
-                    cases: data?.cases,
+                    Cases: data?.cases,
                     todayCases: data?.todayCases,
-                    deaths: data?.deaths,
+                    Deaths: data?.deaths,
                     todayDeaths: data?.todayDeaths,
-                    recovered: data?.recovered,
+                    Recovered: data?.recovered,
                     todayRecovered: data?.todayRecovered,
                     active: data?.active,
                     critical: data?.critical,
