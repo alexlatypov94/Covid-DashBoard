@@ -1,6 +1,7 @@
 import "./assets/css/style.scss";
-import { BaseMarkup } from "./components/index";
+import { BaseMarkup, GlobalTable } from "./components/index";
 
 const markup = new BaseMarkup();
-
+const globalTable = new GlobalTable();
 markup.init();
+globalTable.init();

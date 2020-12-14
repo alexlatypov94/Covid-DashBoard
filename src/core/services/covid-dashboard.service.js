@@ -12,10 +12,10 @@ export class CovidDashboardService {
     getSummary() {
         return this.apiService.getSummary().then((res) => {
             const global = {
-                newConfirmed: res?.Global?.NewConfirmed,
-                newDeaths: res?.Global?.NewDeaths,
-                newRecovered: res?.Global?.NewRecovered,
-                totalConfirmed: res?.Global?.TotalConfirmed,
+                todayCases: res?.Global?.NewConfirmed,
+                todayDeaths: res?.Global?.NewDeaths,
+                todayRecovered: res?.Global?.NewRecovered,
+                totalCases: res?.Global?.TotalConfirmed,
                 totalDeaths: res?.Global?.TotalDeaths,
                 totalRecovered: res?.Global?.TotalRecovered
             };
@@ -51,5 +51,49 @@ export class CovidDashboardService {
      */
     getDayOne(countryName) {
         return this.apiService.getDayOne(countryName).then((res) => mapDayOneCountry(res));
+    }
+
+    getFlagsAndPopulations() {
+        return this.apiService.getFlagPopulations().then((res) => {
+            return res?.map((data) => {
+                return {
+                    flag: data?.flag,
+                    name: data?.name,
+                    population: data?.population
+                };
+            });
+        });
+    }
+
+    getFullInformationCountry() {
+        return this.apiService.getApiCountries().then((res) => {
+            return res?.map((data) => {
+                return {
+                    updated: data?.updated,
+                    country: data?.country,
+                    countryInfo: data?.countryInfo,
+                    totalCases: data?.cases,
+                    todayCases: data?.todayCases,
+                    totalDeaths: data?.deaths,
+                    todayDeaths: data?.todayDeaths,
+                    totalRecovered: data?.recovered,
+                    todayRecovered: data?.todayRecovered,
+                    active: data?.active,
+                    critical: data?.critical,
+                    casesPerOneMillion: data?.casesPerOneMillion,
+                    deathsPerOneMillion: data?.deathsPerOneMillion,
+                    tests: data?.tests,
+                    testsPerOneMillion: data?.testsPerOneMillion,
+                    population: data?.population,
+                    continent: data?.continent,
+                    oneCasePerPeople: data?.oneCasePerPeople,
+                    oneDeathPerPeople: data?.oneDeathPerPeople,
+                    oneTestPerPeople: data?.oneTestPerPeople,
+                    activePerOneMillion: data?.activePerOneMillion,
+                    recoveredPerOneMillion: data?.recoveredPerOneMillion,
+                    criticalPerOneMillion: data?.criticalPerOneMillion
+                };
+            });
+        });
     }
 }

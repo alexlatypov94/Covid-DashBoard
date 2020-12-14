@@ -56,7 +56,11 @@ const config = {
                     loader: "babel-loader",
                     options: {
                         presets: ["@babel/preset-env"],
-                        plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-optional-chaining"]
+                        plugins: [
+                            "@babel/plugin-proposal-class-properties",
+                            "@babel/plugin-proposal-optional-chaining",
+                            "@babel/transform-runtime"
+                        ]
                     }
                 }
             },
