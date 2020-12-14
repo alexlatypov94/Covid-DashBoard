@@ -15,9 +15,9 @@ export class CovidDashboardService {
                 todayCases: res?.Global?.NewConfirmed,
                 todayDeaths: res?.Global?.NewDeaths,
                 todayRecovered: res?.Global?.NewRecovered,
-                Cases: res?.Global?.TotalConfirmed,
-                Deaths: res?.Global?.TotalDeaths,
-                Recovered: res?.Global?.TotalRecovered
+                totalCases: res?.Global?.TotalConfirmed,
+                totalDeaths: res?.Global?.TotalDeaths,
+                totalRecovered: res?.Global?.TotalRecovered
             };
 
             return {
@@ -65,18 +65,18 @@ export class CovidDashboardService {
         });
     }
 
-    getCountriesCoordinate() {
+    getFullInformationCounty() {
         return this.apiService.getApiCountries().then((res) => {
             return res?.map((data) => {
                 return {
                     updated: data?.updated,
                     country: data?.country,
                     countryInfo: data?.countryInfo,
-                    Cases: data?.cases,
+                    totalCases: data?.cases,
                     todayCases: data?.todayCases,
-                    Deaths: data?.deaths,
+                    totalDeaths: data?.deaths,
                     todayDeaths: data?.todayDeaths,
-                    Recovered: data?.recovered,
+                    totalRecovered: data?.recovered,
                     todayRecovered: data?.todayRecovered,
                     active: data?.active,
                     critical: data?.critical,

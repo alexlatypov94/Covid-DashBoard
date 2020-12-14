@@ -5,7 +5,7 @@ import { globalTableTemplate, totalCaseWrapperTemplate, radioButton } from "./gl
 export class GlobalTable {
     constructor() {
         this.service = new CovidDashboardService();
-        this.paramNewOrTotal = "";
+        this.paramNewOrTotal = "total";
         this.param = `${this.paramNewOrTotal}Cases`;
 
         this.totalConfirmed = "item-confirmed-color";
@@ -23,7 +23,7 @@ export class GlobalTable {
         const table = document.querySelector(".table");
         table.insertAdjacentHTML("beforeend", radioButton);
 
-        this.service.getCountriesCoordinate().then((data) => this.renderAndListen(data));
+        this.service.getFullInformationCounty().then((data) => this.renderAndListen(data));
     }
 
     async renderAndListen(data, color) {
@@ -143,7 +143,7 @@ export class GlobalTable {
 
         switch (dataAttribute) {
             case "total":
-                this.paramNewOrTotal = "";
+                this.paramNewOrTotal = "total";
                 this.param = `${this.paramNewOrTotal}Cases`;
                 this.checkDataPopulations === false
                     ? this.checkDataPopulations
@@ -159,7 +159,7 @@ export class GlobalTable {
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
             case "General-hundreed":
-                this.paramNewOrTotal = "";
+                this.paramNewOrTotal = "total";
                 this.param = `${this.paramNewOrTotal}Cases`;
                 this.checkDataPopulations === false
                     ? (this.checkDataPopulations = !this.checkDataPopulations)
