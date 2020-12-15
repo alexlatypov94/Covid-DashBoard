@@ -13,8 +13,8 @@ export class GlobalTable {
         this.totalRecovered = "global-table-item-recovered-color";
 
         this.counterForSwitch = 0;
-        this.titleForCases = "сases";
-        this.titleCurrentCategory = "сases";
+        this.titleForCases = "Cases";
+        this.titleCurrentCategory = "Cases";
 
         this.checkDataPopulations = false;
     }
@@ -84,12 +84,14 @@ export class GlobalTable {
     }
 
     onSwithStatistics(event, data, amount) {
-        const newAmount = amount;
-        let counter;
+        let counter = event.target.closest(".left-change")
+            ? this.counterForSwitch - 1
+            : this.counterForSwitch + 1;
 
-        event.target.closest(".left-change")
-            ? (counter = this.counterForSwitch - 1)
-            : (counter = this.counterForSwitch + 1);
+        /* The switch button has three positions:
+            1. 0 this is Cases position
+            2. 1 this is Deaths position
+            3. 2 this is Recovered position */
 
         if (counter > 2) {
             counter = 0;
@@ -99,24 +101,15 @@ export class GlobalTable {
 
         switch (counter) {
             case 0:
-                newAmount.style.color = COLOR_PALETTE.RED;
-                this.titleCurrentCategory = "cases";
-                this.param = `${this.paramNewOrTotal}Cases`;
-                this.titleForCases = "cases";
+                this.onChangeParametersSwitch(COLOR_PALETTE.RED, "Cases", amount);
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
             case 1:
-                newAmount.style.color = COLOR_PALETTE.GREY;
-                this.titleCurrentCategory = "death";
-                this.param = `${this.paramNewOrTotal}Deaths`;
-                this.titleForCases = "deaths";
+                this.onChangeParametersSwitch(COLOR_PALETTE.GREY, "Deaths", amount);
                 this.renderAndListen(data, this.totalDeath);
                 break;
             default:
-                newAmount.style.color = COLOR_PALETTE.GREEN;
-                this.titleCurrentCategory = "recovered";
-                this.titleForCases = "recovered";
-                this.param = `${this.paramNewOrTotal}Recovered`;
+                this.onChangeParametersSwitch(COLOR_PALETTE.GREEN, "Recovered", amount);
                 this.renderAndListen(data, this.totalRecovered);
                 break;
         }
@@ -129,42 +122,43 @@ export class GlobalTable {
         const dataAttribute = event.target.getAttribute("data-attribute");
         newAmount.style.color = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
-        this.titleForCases = "cases";
-        this.titleCurrentCategory = "cases";
+        this.titleForCases = "Cases";
+        this.titleCurrentCategory = "Cases";
 
         switch (dataAttribute) {
             case "total":
-                this.paramNewOrTotal = "total";
-                this.param = `${this.paramNewOrTotal}Cases`;
-                !this.checkDataPopulations
-                    ? this.checkDataPopulations
-                    : (this.checkDataPopulations = !this.checkDataPopulations);
+                this.onChangeParametersRadio("total");
+                this.checkDataPopulations = false;
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
             case "new":
-                this.paramNewOrTotal = "today";
-                this.param = `${this.paramNewOrTotal}Cases`;
-                !this.checkDataPopulations
-                    ? this.checkDataPopulations
-                    : (this.checkDataPopulations = !this.checkDataPopulations);
+                this.onChangeParametersRadio("today");
+                this.checkDataPopulations = false;
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
             case "general-hundreed":
-                this.paramNewOrTotal = "total";
-                this.param = `${this.paramNewOrTotal}Cases`;
-                !this.checkDataPopulations
-                    ? (this.checkDataPopulations = !this.checkDataPopulations)
-                    : this.checkDataPopulations;
+                this.onChangeParametersRadio("total");
+                this.checkDataPopulations = true;
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
             default:
-                this.paramNewOrTotal = "today";
-                this.param = `${this.paramNewOrTotal}Cases`;
-                !this.checkDataPopulations
-                    ? (this.checkDataPopulations = !this.checkDataPopulations)
-                    : this.checkDataPopulations;
+                this.onChangeParametersRadio("today");
+                this.checkDataPopulations = true;
                 this.renderAndListen(data, this.totalConfirmed);
                 break;
         }
+    }
+
+    onChangeParametersRadio(paramDate) {
+        this.paramNewOrTotal = paramDate;
+        this.param = `${this.paramNewOrTotal}Cases`;
+    }
+
+    onChangeParametersSwitch(colorTitle, wordCategory, amount) {
+        const newAmount = amount;
+        newAmount.style.color = colorTitle;
+        this.titleCurrentCategory = wordCategory;
+        this.param = `${this.paramNewOrTotal}${wordCategory}`;
+        this.titleForCases = wordCategory;
     }
 }
