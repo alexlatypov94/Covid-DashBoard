@@ -3,9 +3,10 @@ import { BaseMarkup, GlobalTable, CountryList, MapCovied, legendMapHandler } fro
 
 const markup = new BaseMarkup();
 const globalTable = new GlobalTable();
+const graph = new DrawGraph();
 markup.init();
 globalTable.init();
-
+graph.initGraph();
 const countryList = new CountryList();
 
 countryList.init();

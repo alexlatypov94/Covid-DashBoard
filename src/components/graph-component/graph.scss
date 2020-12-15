@@ -1,0 +1,146 @@
+.graph {
+    width: 100%;
+    height: 20%;
+    border: 2px solid #f00bab;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .base-markup-btn-increase {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -2px;
+        top: -20px;
+        background: #666663;
+        border: 1px solid #0a0a0a;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.5s linear;
+
+        img {
+            width: 80%;
+        }
+    }
+
+    &:hover .base-markup-btn-increase {
+        opacity: 1;
+        visibility: visible;
+    }
+    .draw-graph-switch {
+        font-size: 44px;
+        background: #2c21292f;
+        border: none;
+        color: rgba(157, 163, 163, 0.637);
+        width: 10%;
+        cursor: pointer;
+        outline: none;
+        transition: 0.3s linear;
+
+        &:hover {
+            background: #251c23ab;
+            color: rgb(207, 219, 214);
+        }
+    }
+
+    .draw-graph-left {
+        order: 0;
+    }
+
+    .draw-graph-right {
+        order: 4;
+    }
+    .graph-wrapper-canvas {
+        width: 34%;
+        display: flex;
+        justify-content: center;
+        order: 2;
+        canvas {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .draw-graph-select-coutry {
+        color: #929180;
+        margin-right: 10px;
+        margin-top: 10px;
+        height: 20px;
+        width: 10%;
+        order: 3;
+        outline: none;
+        background: #25252541;
+        border: 1px #0a0a0a solid;
+        cursor: pointer;
+        &::-webkit-scrollbar {
+            width: 0.56rem;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #999;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 1.11rem;
+            background-color: #666;
+        }
+    }
+
+    .draw-graph-left-select-btn {
+        order: 1;
+        width: 10%;
+        .draw-graph-select {
+            color: #929180;
+            margin-left: 10px;
+            margin-top: 10px;
+            width: 100%;
+            height: 20px;
+            outline: none;
+            background: #25252541;
+            border: 1px #0a0a0a solid;
+
+            cursor: pointer;
+        }
+        .draw-graph-go-global-cases {
+            width: 100%;
+            height: 20px;
+            background: #666;
+            border: 1px solid #0a0a0a;
+            margin-top: 10px;
+            margin-left: 10px;
+            outline: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: aliceblue;
+            }
+        }
+    }
+
+    option {
+        background: #000000e8;
+        border: 1px #0a0a0a solid;
+
+        &:hover {
+            background: #f00bab;
+        }
+    }
+}
+
+.full-screen-window {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    background: #2c0f0f;
+    canvas {
+        position: relative;
+        top: 30%;
+    }
+}
