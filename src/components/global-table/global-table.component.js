@@ -84,11 +84,14 @@ export class GlobalTable {
     }
 
     onSwithStatistics(event, data, amount) {
-        let counter;
+        let counter = event.target.closest(".left-change")
+            ? this.counterForSwitch - 1
+            : this.counterForSwitch + 1;
 
-        event.target.closest(".left-change")
-            ? (counter = this.counterForSwitch - 1)
-            : (counter = this.counterForSwitch + 1);
+        /* The switch button has three positions:
+            1. 0 this is Cases position
+            2. 1 this is Deaths position
+            3. 2 this is Recovered position */
 
         if (counter > 2) {
             counter = 0;
