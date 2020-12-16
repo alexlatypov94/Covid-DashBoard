@@ -1,0 +1,43 @@
+.graph {
+    width: 100%;
+    height: 30%;
+    border: 2px solid #f00bab;
+    display: flex;
+    justify-content: center;
+    .graph-wrapper-canvas {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        canvas {
+            order: 1;
+            display: block;
+            width: 80%;
+        }
+
+        .draw-graph-switch {
+            font-size: 44px;
+            background: #2c21292f;
+            border: none;
+            color: rgba(157, 163, 163, 0.637);
+            width: 10%;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s linear;
+
+            &:hover {
+                background: #251c23ab;
+                color: rgb(207, 219, 214);
+            }
+        }
+
+        .draw-graph-left {
+            
+            order: 0;
+        }
+
+        .draw-graph-right {
+            order: 2;
+        }
+    }
+      
+}
