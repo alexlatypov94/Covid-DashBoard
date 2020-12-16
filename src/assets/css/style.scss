@@ -1,7 +1,8 @@
-*,
+@import "../../components/keyboard/keyboard.component.scss";
+
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 h1,
@@ -11,42 +12,43 @@ h4,
 h5,
 h6,
 p {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    background: #2c0f0f;
-    margin: 0;
-    padding: 0 30px;
+	background: #2c0f0f;
+	margin: 0;
+	padding: 0 30px;
 }
 
 .wrapper {
-    display: flex;
-    width: 100%;
-    min-width: 1024px;
-    height: 100vh;
-    margin: 0 auto;
-    border: 3px solid #f0e00b;
-    .country-list {
-        width: 20%;
-        border: 2px solid #f0e00b;
-        height: 100vh;
-    }
+	display: flex;
+	width: 100%;
+	min-width: 1024px;
+	height: 100vh;
+	margin: 0 auto;
+	border: 3px solid #f0e00b;
+	.country-list {
+		width: 20%;
+		border: 2px solid #f0e00b;
+		height: 100vh;
+	}
 
-    .wrapper-for-map {
-        width: 60%;
-        border: 2px solid #0bf03d;
-        .world-map {
-            width: 100%;
-            height: 80%;
-            border: 2px solid #220bf0;
-        }
+	.wrapper-for-map {
+		width: 60%;
+		border: 2px solid #0bf03d;
+		.world-map {
+			width: 100%;
+			height: 80%;
+			border: 2px solid #220bf0;
+		}
 
-        .graph {
-            width: 100%;
-            height: 20%;
-            border: 2px solid #f00bab;
-        }
-    }
+		.graph {
+			width: 100%;
+			height: 20%;
+			border: 2px solid #f00bab;
+			position: relative;
+		}
+	}
 }
