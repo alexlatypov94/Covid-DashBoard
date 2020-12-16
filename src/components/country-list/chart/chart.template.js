@@ -1,15 +1,17 @@
-export const chartTemplate = `
-<div class = "country-list-title">title</div>
-<ul class ="countries-wrapper"></ul>
-<div class ="country-search">
-<input class="country-input" placeholder="Search...">
-<div class ="country-keyboard"></div>
+export const chartTemplate = (lastUpdate) => {
+	return `
+<div class = "country-list-title">last update: ${lastUpdate} </div>
+<ul class ="country-list-countries-wrapper"></ul>
+<div class ="country-list-country-search">
+<input class="country-list-country-input" placeholder="Search...">
+<div class ="country-list-keyboard"></div>
 </div>
 `;
+};
 export const countryTemplate = (countryCode, countryFlag, country, categoryName) => {
-    return `
-<li class ="country-wrapper" data-country ="${countryCode}">
-	<span><img class="flag" src="${countryFlag}"></span>
+	return `
+<li class ="country-list-country-wrapper" data-country ="${countryCode}">
+	<span><img class="country-list-flag" src="${countryFlag}"></span>
 	<span class="country-list-country-name">${country}</span>
 	<span class="country-list-value ">${categoryName}</span>
 </li>

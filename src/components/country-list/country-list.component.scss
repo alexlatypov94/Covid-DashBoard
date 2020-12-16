@@ -1,16 +1,15 @@
 @import "./chart/chart.scss";
 
-
-.country-list{
+.country-list {
 	position: relative;
 	min-height: 100%;
 }
-.country-list-wrapper{
+.country-list-wrapper {
 	padding: 5px;
 	padding-bottom: 40px;
 	color: white;
 }
-.switch-wrapper{
+.country-list-switch-wrapper {
 	position: absolute;
 	display: flex;
 	color: white;
@@ -21,11 +20,10 @@
 	align-items: center;
 	box-shadow: inset 0 0 0 1px white;
 }
-.title-current-category{
+.country-list-swich-title {
 	display: inline-block;
-	
 }
-.btn-changes{
+.country-list-btn-changes {
 	background-color: transparent;
 	color: white;
 	border: none;
