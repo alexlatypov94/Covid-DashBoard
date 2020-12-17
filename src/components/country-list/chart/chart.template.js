@@ -1,5 +1,5 @@
 export const chartTemplate = (lastUpdate) => {
-	return `
+    return `
 <div class = "country-list-title">last update: ${lastUpdate} </div>
 <ul class ="country-list-countries-wrapper"></ul>
 <div class ="country-list-country-search">
@@ -8,12 +8,12 @@ export const chartTemplate = (lastUpdate) => {
 </div>
 `;
 };
-export const countryTemplate = (countryCode, countryFlag, country, categoryName) => {
-	return `
+export const countryTemplate = (countryCode, countryFlag, country, value) => {
+    return `
 <li class ="country-list-country-wrapper" data-country ="${countryCode}">
 	<span><img class="country-list-flag" src="${countryFlag}"></span>
 	<span class="country-list-country-name">${country}</span>
-	<span class="country-list-value ">${categoryName}</span>
+	<div class="country-list-value ">${value}</div>
 </li>
 `;
 };
