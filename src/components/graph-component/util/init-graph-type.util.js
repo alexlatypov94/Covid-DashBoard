@@ -29,7 +29,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                         ticks: {
                             beginAtZero: true,
                             maxTicksLimit: 5,
-                            fontSize: 20,
+                            fontSize: 14,
 
                             "callback": function (value) {
                                 const newValue = value.toString().length > 5 ? `${value / 1000000}M` : value;
@@ -45,7 +45,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                     {
                         ticks: {
                             maxTicksLimit: 11,
-                            fontSize: 20,
+                            fontSize: 14,
                             "callback": function (value) {
                                 const month = [
                                     "Jan",
@@ -72,4 +72,6 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
             }
         }
     });
+
+    return myChart
 }

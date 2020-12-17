@@ -41,6 +41,12 @@ export class CovidDashBoardApiService {
             .catch((err) => err)
     }
 
+    getApiForChooseCountry(country){
+        return fetch(`https://disease.sh/v3/covid-19/historical/${country}?lastdays=all`)
+        .then((res) => this.getStatus(res))
+        .catch((err) => err)
+    }
+
 
     getStatus(res) {
         return res?.status >= 200 && res?.status < 300 ? res?.json() : undefined;

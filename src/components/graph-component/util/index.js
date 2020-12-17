@@ -1,2 +1,2 @@
 export * from "./get-value.util"
-export * from "./create-graph.util"
+export * from "./init-graph-type.util"

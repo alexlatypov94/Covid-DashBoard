@@ -1,4 +1,4 @@
-import { graphWrapperCanvas, canvasBoard } from "./graph.template";
+import { graphWrapperCanvas, canvasBoard, toggleForGraph, selectOptions } from "./graph.template";
 import { CovidDashboardService } from "../../core/services/covid-dashboard.service";
 import { getValueCumulative, getKeys, getValueDays, initGraphType } from "./util/index";
 import { COLOR_PALETTE } from "../../core/constants";
@@ -12,13 +12,24 @@ export class DrawGraph {
         this.borderColor = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
 
+        this.chooseCountry = "";
         this.configForGraph = "Cumulative";
+        this.globalOrCountry = false
     }
 
     initGraph() {
         const graphWrapper = document.querySelector(".graph");
         graphWrapper.insertAdjacentHTML("beforeend", graphWrapperCanvas);
-        this.service.getApiGlobalForGraph().then((data) => this.renderAndListen(data));
+        graphWrapper.insertAdjacentHTML("beforeend", toggleForGraph);
+        this.chooseApi()
+    }
+
+    chooseApi() {
+        this.service.getFullInformationCountry().then((dataCountry) => this.addSelectItems(dataCountry));
+        !this.globalOrCountry
+            ? this.service.getApiGlobalForGraph().then((data) => this.renderAndListen(data))
+            : this.service.getFullInformationChooseCountry(this.chooseCountry)
+            .then((dataCountry) => this.renderAndListen(dataCountry));
     }
 
     async renderAndListen(data) {
@@ -35,76 +46,6 @@ export class DrawGraph {
         if (this.configForGraph === "Cumulative") {
             const dataObject = getValueCumulative(data[this.keyObj]);
             initGraphType(graphCanvas, "line", labels, dataObject, this.backgroundColor, this.borderColor, this.label);
-            // const myChart = new Chart(graphCanvas, {
-            //     type: "line",
-            //     data: {
-            //         labels: getKeys(data[this.keyObj]),
-            //         datasets: [
-            //             {
-            //                 label: this.label,
-            //                 data: getValueCumulative(data[this.keyObj]),
-            //                 backgroundColor: [this.backgroundColor],
-            //                 borderColor: [this.borderColor],
-            //                 borderWidth: 1
-            //             }
-            //         ]
-            //     },
-            //     options: {
-            //         legend: {
-            //             fontSize: 30,
-            //             labels: {
-            //                 fontSize: 24
-            //             }
-            //         },
-            //         scales: {
-            //             yAxes: [
-            //                 {
-            //                     ticks: {
-            //                         beginAtZero: true,
-            //                         maxTicksLimit: 5,
-            //                         fontSize: 20,
-
-            //                         "callback": function (value) {
-            //                             const newValue = value.toString().length > 5 ? `${value / 1000000}M` : value;
-
-            //                             return newValue;
-            //                         }
-            //                     },
-            //                     position: "right"
-            //                 }
-            //             ],
-
-            //             xAxes: [
-            //                 {
-            //                     ticks: {
-            //                         maxTicksLimit: 11,
-            //                         fontSize: 20,
-            //                         "callback": function (value) {
-            //                             const month = [
-            //                                 "Jan",
-            //                                 "Feb",
-            //                                 "Mar",
-            //                                 "Apr",
-            //                                 "May",
-            //                                 "June",
-            //                                 "July",
-            //                                 "Aug",
-            //                                 "Sep",
-            //                                 "Oct",
-            //                                 "Nov",
-            //                                 "Dec"
-            //                             ];
-            //                             const newValue = value.split("/");
-            //                             const valueMonth = newValue.splice(0, 1).join("");
-            //                             const changedNameTicks = month[valueMonth - 1];
-            //                             return changedNameTicks;
-            //                         }
-            //                     }
-            //                 }
-            //             ]
-            //         }
-            //     }
-            // });
         }
 
         if (this.configForGraph === "Day") {
@@ -117,20 +58,41 @@ export class DrawGraph {
         const graphWrapper = document.querySelector(".graph");
         const graphCanvas = document.querySelector(".canvas-board");
         const wrapperCanvasForRemove = document.querySelector(".graph-wrapper-canvas");
+
+        graphWrapper.addEventListener("change", (event) => {
+            if (event.target.closest(".draw-graph-select")) {
+                wrapperCanvasForRemove.innerHTML = "";
+                this.configForGraph = event.target.value;
+                this.renderAndListen(data);
+            }
+
+            if (event.target.closest(".draw-graph-select-coutry")) {
+                wrapperCanvasForRemove.innerHTML = "";
+                if (event.target.value !== "Choose Country") {
+                    this.chooseCountry = event.target.value;
+                    this.globalOrCountry = true
+
+                    this.chooseApi()
+                }
+            }
+
+            event.stopImmediatePropagation();
+        });
+
         graphWrapper.addEventListener("click", (event) => {
             if (event.target.closest(".draw-graph-switch")) {
                 wrapperCanvasForRemove.innerHTML = "";
                 this.onSwitchGraph(event, data);
             }
+
             event.stopImmediatePropagation();
         });
 
         graphCanvas.removeAttribute("style", "width", "height");
     }
 
-    onSwitchGraph(event, data) {
+    onSwitchGraph(event) {
         let counter = event.target.closest(".left-change") ? this.counterForSwitch - 1 : this.counterForSwitch + 1;
-
         /* The switch button has three positions:
         1. 0 this is Cases position
         2. 1 this is Deaths position
@@ -145,15 +107,15 @@ export class DrawGraph {
         switch (counter) {
             case 0:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.RED, "Cases", "totalCases");
-                this.renderAndListen(data);
+                this.chooseApi()
                 break;
             case 1:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.GREY, "Deaths", "totalDeaths");
-                this.renderAndListen(data);
+                 this.chooseApi()
                 break;
             default:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.GREEN, "Recovered", "totalRecovered");
-                this.renderAndListen(data);
+                this.chooseApi()
                 break;
         }
 
@@ -166,4 +128,18 @@ export class DrawGraph {
         this.label = type;
         this.keyObj = objKey;
     }
+
+    addSelectItems(data) {
+        this.countryObj = data;
+        const selectCountry = document.querySelector(".draw-graph-select-coutry");
+        data.forEach((el) => {
+            selectCountry.insertAdjacentHTML("beforeend", selectOptions(el.country, el.countryInfo.iso3));
+        });
+    }
 }
+
+const card = document.querySelectorAll(".card");
+
+card.forEach((item) => {
+    item.classList.add(".card-active");
+});
