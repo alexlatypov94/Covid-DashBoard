@@ -1,4 +1,4 @@
-import { keyboard } from "./keyboard.component.template";
+import { playAydio } from "../../core/index";
 
 export const Keyboard = {
     elements: {
@@ -18,11 +18,6 @@ export const Keyboard = {
         capsLock: false
     },
 
-    initArea() {
-        this.elements.searchField = document.querySelector(".world-map");
-        this.elements.searchField.insertAdjacentHTML("beforeend", keyboard);
-        this.init();
-    },
     init() {
         this.elements.main = document.createElement("div");
         this.elements.keysContainer = document.createElement("div");
@@ -34,34 +29,72 @@ export const Keyboard = {
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
 
         this.elements.main.appendChild(this.elements.keysContainer);
-        const kwyboarWrapper = document.querySelector(".graph");
+        const kwyboarWrapper = document.querySelector(".country-list");
         kwyboarWrapper.appendChild(this.elements.main);
+    },
 
-        // delete this block after button binding
+    show() {
         document.querySelectorAll(".use-keyboard-input").forEach((element) => {
-            element.addEventListener("focus", () => {
-                this.open(element.value, (currentValue) => {
-                    // eslint-disable-next-line no-param-reassign
-                    element.value = currentValue;
-                });
+            this.open(element.value, (currentValue) => {
+                // eslint-disable-next-line no-param-reassign
+                element.value = currentValue;
             });
         });
     },
 
+    hide() {
+        this.close();
+        this.triggerEvent("onclose");
+    },
+
     createKeys() {
         const fragment = document.createDocumentFragment();
+        // 	const keyLayout = [
+        // 		"1",
+        // 		"2",
+        // 		"3",
+        // 		"4",
+        // 		"5",
+        // 		"6",
+        // 		"7",
+        // 		"8",
+        // 		"9",
+        // 		"0",
+        // 		"backspace",
+        // 		"q",
+        // 		"w",
+        // 		"e",
+        // 		"r",
+        // 		"t",
+        // 		"y",
+        // 		"u",
+        // 		"i",
+        // 		"o",
+        // 		"p",
+        // 		"a",
+        // 		"s",
+        // 		"d",
+        // 		"f",
+        // 		"g",
+        // 		"h",
+        // 		"j",
+        // 		"k",
+        // 		"l",
+        // 		"enter",
+        // 		"caps",
+        // 		"z",
+        // 		"x",
+        // 		"c",
+        // 		"v",
+        // 		"b",
+        // 		"n",
+        // 		"m",
+        // 		",",
+        // 		".",
+        // 		"space"
+        // ];
+
         const keyLayout = [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "0",
-            "backspace",
             "q",
             "w",
             "e",
@@ -81,8 +114,7 @@ export const Keyboard = {
             "j",
             "k",
             "l",
-            "enter",
-            "caps",
+            "backspace",
             "z",
             "x",
             "c",
@@ -90,9 +122,7 @@ export const Keyboard = {
             "b",
             "n",
             "m",
-            ",",
-            ".",
-            "done", // delete this block after button binding
+            "enter",
             "space"
         ];
 
@@ -118,24 +148,13 @@ export const Keyboard = {
 
                     break;
 
-                case "caps":
-                    keyElement.classList.add("keyboard__key--activatable");
-                    keyElement.innerHTML = createIconHTML("keyboard_capslock");
-
-                    keyElement.addEventListener("click", () => {
-                        this.toggleCapsLock();
-                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
-                    });
-
-                    break;
-
                 case "enter":
                     keyElement.classList.add("keyboard__key--wide");
                     keyElement.innerHTML = createIconHTML("keyboard_return");
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value += "\n";
-                        this.triggerEvent("oninput");
+                        this.close();
+                        this.triggerEvent("onclose");
                     });
 
                     break;
@@ -147,17 +166,6 @@ export const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.properties.value += " ";
                         this.triggerEvent("oninput");
-                    });
-
-                    break;
-
-                case "done":
-                    keyElement.classList.add("keyboard__key--wide");
-                    keyElement.innerHTML = createIconHTML("check_circle");
-
-                    keyElement.addEventListener("click", () => {
-                        this.close();
-                        this.triggerEvent("onclose");
                     });
 
                     break;
@@ -184,22 +192,12 @@ export const Keyboard = {
     },
 
     triggerEvent(handlerName) {
+        const input = document.querySelector(".use-keyboard-input");
         if (typeof this.eventHandlers[handlerName] === "function") {
             this.eventHandlers[handlerName](this.properties.value);
         }
-    },
-
-    toggleCapsLock() {
-        this.properties.capsLock = !this.properties.capsLock;
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const key of this.elements.keys) {
-            if (key.childElementCount === 0) {
-                key.textContent = this.properties.capsLock
-                    ? key.textContent.toUpperCase()
-                    : key.textContent.toLowerCase();
-            }
-        }
+        input.focus();
+        playAydio("../../assets/audio/click.mp3");
     },
 
     open(initialValue, oninput, onclose) {
@@ -216,7 +214,3 @@ export const Keyboard = {
         this.elements.main.classList.add("keyboard--hidden");
     }
 };
-
-// window.addEventListener("DOMContentLoaded", function () {
-//     Keyboard.init();
-// });
