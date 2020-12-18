@@ -3,7 +3,7 @@ export const chartTemplate = (lastUpdate) => {
 <div class = "country-list-title">last update: ${lastUpdate} </div>
 <ul class ="country-list-countries-wrapper"></ul>
 <div class ="country-list-country-search">
-<input class="country-list-country-input" placeholder="Search...">
+<input class="country-list-country-input use-keyboard-input" placeholder="Search...">
 <div class ="country-list-keyboard"></div>
 </div>
 `;
