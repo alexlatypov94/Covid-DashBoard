@@ -1,7 +1,7 @@
 import { graphWrapperCanvas, canvasBoard, toggleForGraph, selectOptions } from "./graph.template";
 import { CovidDashboardService } from "../../core/services/covid-dashboard.service";
 import { getValueCumulative, getKeys, getValueDays, initGraphType } from "./util/index";
-import { COLOR_PALETTE } from "../../core/constants";
+import { COLOR_PALETTE } from "../../core/index";
 
 export class DrawGraph {
     constructor() {
@@ -9,27 +9,38 @@ export class DrawGraph {
         this.label = "Cases";
         this.keyObj = "totalCases";
         this.backgroundColor = COLOR_PALETTE.RED;
-        this.borderColor = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
 
-        this.chooseCountry = "";
+        this.dataFullCountry = [];
+
         this.configForGraph = "Cumulative";
-        this.globalOrCountry = false
+        this.globalOrCountry = false;
+
+        /* this variables to init common logic */
+        this.chooseCountry = "";
+        this.populationDivision = false;
+        this.population = 0;
+
+        this.btnClick = false;
     }
 
     initGraph() {
         const graphWrapper = document.querySelector(".graph");
         graphWrapper.insertAdjacentHTML("beforeend", graphWrapperCanvas);
         graphWrapper.insertAdjacentHTML("beforeend", toggleForGraph);
-        this.chooseApi()
+        this.service.getFullInformationCountry().then((dataCountry) => {
+            this.dataFullCountry = dataCountry;
+            this.addSelectItems(dataCountry);
+            this.chooseApi(dataCountry);
+        });
     }
 
     chooseApi() {
-        this.service.getFullInformationCountry().then((dataCountry) => this.addSelectItems(dataCountry));
         !this.globalOrCountry
             ? this.service.getApiGlobalForGraph().then((data) => this.renderAndListen(data))
-            : this.service.getFullInformationChooseCountry(this.chooseCountry)
-            .then((dataCountry) => this.renderAndListen(dataCountry));
+            : this.service
+                  .getFullInformationChooseCountry(this.chooseCountry)
+                  .then((dataCountry) => this.renderAndListen(dataCountry));
     }
 
     async renderAndListen(data) {
@@ -44,13 +55,23 @@ export class DrawGraph {
         const labels = getKeys(data[this.keyObj]);
 
         if (this.configForGraph === "Cumulative") {
-            const dataObject = getValueCumulative(data[this.keyObj]);
-            initGraphType(graphCanvas, "line", labels, dataObject, this.backgroundColor, this.borderColor, this.label);
+            this.population = this.dataFullCountry.reduce((acc, curr) => acc + curr.population, 0);
+
+            const dataObject = !this.populationDivision
+                ? getValueCumulative(data[this.keyObj])
+                : getValueCumulative(data[this.keyObj], this.population);
+
+            initGraphType(graphCanvas, "line", labels, dataObject, this.backgroundColor, this.label);
         }
 
         if (this.configForGraph === "Day") {
-            const dataObject = getValueDays(data[this.keyObj]);
-            initGraphType(graphCanvas, "bar", labels, dataObject, this.backgroundColor, this.borderColor, this.label);
+            this.population = this.dataFullCountry.reduce((acc, curr) => acc + curr.population, 0);
+
+            const dataObject = !this.populationDivision
+                ? getValueDays(data[this.keyObj])
+                : getValueDays(data[this.keyObj], this.population);
+
+            initGraphType(graphCanvas, "bar", labels, dataObject, this.backgroundColor, this.label);
         }
     }
 
@@ -58,21 +79,25 @@ export class DrawGraph {
         const graphWrapper = document.querySelector(".graph");
         const graphCanvas = document.querySelector(".canvas-board");
         const wrapperCanvasForRemove = document.querySelector(".graph-wrapper-canvas");
+        graphCanvas.removeAttribute("style");
 
         graphWrapper.addEventListener("change", (event) => {
             if (event.target.closest(".draw-graph-select")) {
                 wrapperCanvasForRemove.innerHTML = "";
                 this.configForGraph = event.target.value;
-                this.renderAndListen(data);
+                this.chooseApi();
             }
 
             if (event.target.closest(".draw-graph-select-coutry")) {
                 wrapperCanvasForRemove.innerHTML = "";
-                if (event.target.value !== "Choose Country") {
+                if (event.target.value !== "All world") {
                     this.chooseCountry = event.target.value;
-                    this.globalOrCountry = true
-
-                    this.chooseApi()
+                    this.globalOrCountry = true;
+                    this.chooseApi();
+                } else {
+                    this.chooseCountry = event.target.value;
+                    this.globalOrCountry = false;
+                    this.chooseApi();
                 }
             }
 
@@ -85,10 +110,16 @@ export class DrawGraph {
                 this.onSwitchGraph(event, data);
             }
 
+            if (event.target.closest(".base-markup-btn-increase")) {
+                !this.btnClick
+                    ? graphWrapper.classList.add("full-screen-window")
+                    : graphWrapper.classList.remove("full-screen-window");
+
+                this.btnClick = !this.btnClick;
+            }
+
             event.stopImmediatePropagation();
         });
-
-        graphCanvas.removeAttribute("style", "width", "height");
     }
 
     onSwitchGraph(event) {
@@ -107,15 +138,15 @@ export class DrawGraph {
         switch (counter) {
             case 0:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.RED, "Cases", "totalCases");
-                this.chooseApi()
+                this.chooseApi();
                 break;
             case 1:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.GREY, "Deaths", "totalDeaths");
-                 this.chooseApi()
+                this.chooseApi();
                 break;
             default:
                 this.onChangeParametersSwitchGraph(COLOR_PALETTE.GREEN, "Recovered", "totalRecovered");
-                this.chooseApi()
+                this.chooseApi();
                 break;
         }
 
@@ -130,16 +161,9 @@ export class DrawGraph {
     }
 
     addSelectItems(data) {
-        this.countryObj = data;
         const selectCountry = document.querySelector(".draw-graph-select-coutry");
         data.forEach((el) => {
             selectCountry.insertAdjacentHTML("beforeend", selectOptions(el.country, el.countryInfo.iso3));
         });
     }
 }
-
-const card = document.querySelectorAll(".card");
-
-card.forEach((item) => {
-    item.classList.add(".card-active");
-});

@@ -96,6 +96,7 @@ export class CovidDashboardService {
             });
         });
     }
+    
     getApiGlobalForGraph() {
         return this.apiService.getApiIntensityCases().then((res) => {
             return {

@@ -4,6 +4,35 @@
     border: 2px solid #f00bab;
     display: flex;
     justify-content: center;
+    position: relative;
+
+    .base-markup-btn-increase {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -2px;
+        top: -20px;
+        background: #666663;
+        border: 1px solid #0a0a0a;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.5s linear;
+
+        img {
+            width: 80%;
+        }
+    }
+
+    &:hover .base-markup-btn-increase {
+        opacity: 1;
+        visibility: visible;
+    }
     .draw-graph-switch {
         font-size: 44px;
         background: #2c21292f;
@@ -21,7 +50,6 @@
     }
 
     .draw-graph-left {
-        
         order: 0;
     }
 
@@ -35,7 +63,7 @@
         order: 2;
         canvas {
             display: block;
-            // width: 50%;
+            width: 100%;
         }
     }
 
@@ -74,9 +102,8 @@
             outline: none;
             background: #25252541;
             border: 1px #0a0a0a solid;
-            
+
             cursor: pointer;
-    
         }
         .draw-graph-go-global-cases {
             width: 100%;
@@ -92,20 +119,24 @@
                 background-color: aliceblue;
             }
         }
-        
     }
-
-    
 
     option {
         background: #000000e8;
         border: 1px #0a0a0a solid;
-       
 
         &:hover {
             background: #f00bab;
         }
     }
-    
-   
+}
+
+.full-screen-window {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    margin: 0 auto;
+    width: 90vw;
+    height: 90vh;
+    background: #2c0f0f;
 }

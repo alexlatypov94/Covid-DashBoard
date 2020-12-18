@@ -1,6 +1,6 @@
 import { Chart } from "chart.js";
 
-export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgColor, bordColor, title) {
+export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgColor, title) {
     const myChart = new Chart(graphCanvas, {
         type: typeGraph,
         data: {
@@ -10,7 +10,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                     label: title,
                     data: dataArray,
                     backgroundColor: bgColor,
-                    borderColor: bordColor,
+                    borderColor: "#000000",
                     pointRadius: 1,
                     borderWidth: 1
                 }
@@ -18,7 +18,6 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
         },
         options: {
             legend: {
-                
                 labels: {
                     fontSize: 24
                 }
@@ -32,7 +31,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                             fontSize: 14,
 
                             "callback": function (value) {
-                                const newValue = value.toString().length > 5 ? `${value / 1000000}M` : value;
+                                const newValue = value.toString().length > 4 ? `${value / 1000000}M` : value;
 
                                 return newValue;
                             }
@@ -73,5 +72,5 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
         }
     });
 
-    return myChart
+    return myChart;
 }

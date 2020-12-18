@@ -13,9 +13,7 @@ export const API_URL_FLAGS_POPULATION = "https://restcountries.eu/rest/v2/all?fi
 
 export const COUNTRIES = "https://corona.lmao.ninja/v2/countries";
 
-export const API_FOR_GRAPH_GLOBAL = "https://disease.sh/v3/covid-19/historical/all?lastdays=all"
-
-export const API_FOR_GRAPH_GLOBAL = "https://disease.sh/v3/covid-19/historical/all?lastdays=all"
+export const API_FOR_GRAPH_GLOBAL = "https://disease.sh/v3/covid-19/historical/all?lastdays=all";
 
 export const ONE_HUNDREED = 100000;
 
