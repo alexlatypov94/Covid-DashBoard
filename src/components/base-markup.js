@@ -1,6 +1,8 @@
 export class BaseMarkup {
     init() {
-        document.body.insertAdjacentHTML('afterbegin', `
+        document.body.insertAdjacentHTML(
+            "afterbegin",
+            `
         <header>
         
         </header>
@@ -18,8 +20,7 @@ export class BaseMarkup {
         
         </footer>
         
-        `)
-
+        `
+        );
     }
-
 }
