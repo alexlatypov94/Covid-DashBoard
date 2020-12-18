@@ -22,7 +22,7 @@ export class CountryList {
         const input = document.querySelector(".country-list-country-input");
 
         input.addEventListener("keyup", () => {
-            this.chart.serch();
+            this.chart.search();
         });
     }
 }
