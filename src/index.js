@@ -1,5 +1,5 @@
 import "./assets/css/style.scss";
-import { BaseMarkup, GlobalTable, CountryList } from "./components/index";
+import { BaseMarkup, GlobalTable, CountryList, MapCovied, legendMapHandler } from "./components/index";
 
 const markup = new BaseMarkup();
 const globalTable = new GlobalTable();
@@ -9,3 +9,6 @@ globalTable.init();
 const countryList = new CountryList();
 
 countryList.init();
+const mapCovied = new MapCovied();
+mapCovied.init();
+legendMapHandler();
