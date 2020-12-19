@@ -21,11 +21,6 @@ export class CountryList {
         this.chart.render(data);
         Keyboard.init();
 
-        // const input = document.querySelector(".country-list-country-input");
-
-        // input.addEventListener("input", () => {
-        //     this.chart.search();
-        // });
         setInterval(() => this.chart.search(), 1000);
 
         const keyboardButton = document.querySelector(".country-list-keyboard");
