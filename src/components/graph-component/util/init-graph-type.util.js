@@ -17,6 +17,8 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
             ]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             legend: {
                 labels: {
                     fontSize: 14
@@ -28,7 +30,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                         ticks: {
                             beginAtZero: true,
                             maxTicksLimit: 5,
-                            fontSize: 14,
+                            fontSize: 12,
 
                             "callback": function (value) {
                                 const newValue = value.toString().length > 4 ? `${value / 10e5}M` : value;
@@ -44,7 +46,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                     {
                         ticks: {
                             maxTicksLimit: 11,
-                            fontSize: 14,
+                            fontSize: 12,
                             "callback": function (value) {
                                 const month = [
                                     "Jan",

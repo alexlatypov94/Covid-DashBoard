@@ -1,7 +1,7 @@
-import { ONE_HUNDREED } from "../../../core";
+import { ONE_HUNDREED } from "../../../core/index";
 
 export function getValueCumulative(obj, population) {
-    if (population === undefined) {
+    if (!population) {
         return Object.values(obj);
     }
     return Object.values(obj).map((el) => {
@@ -14,7 +14,7 @@ export function getKeys(obj) {
 }
 
 export function getValueDays(obj, population) {
-    if (population === undefined) {
+    if (!population) {
         return Object.values(obj)
             .map((item, index, arr) => item - (arr[index - 1] || 0))
             .filter((el) => el > 0);

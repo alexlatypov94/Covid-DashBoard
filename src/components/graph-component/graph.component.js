@@ -53,10 +53,9 @@ export class DrawGraph {
         canvasWrapper.insertAdjacentHTML("beforeend", canvasBoard);
         const graphCanvas = document.querySelector(".canvas-board").getContext("2d");
         const labels = getKeys(data[this.keyObj]);
+        this.population = this.dataFullCountry.reduce((acc, curr) => acc + curr.population, 0);
 
         if (this.configForGraph === "Cumulative") {
-            this.population = this.dataFullCountry.reduce((acc, curr) => acc + curr.population, 0);
-
             const dataObject = !this.populationDivision
                 ? getValueCumulative(data[this.keyObj])
                 : getValueCumulative(data[this.keyObj], this.population);
@@ -65,8 +64,6 @@ export class DrawGraph {
         }
 
         if (this.configForGraph === "Day") {
-            this.population = this.dataFullCountry.reduce((acc, curr) => acc + curr.population, 0);
-
             const dataObject = !this.populationDivision
                 ? getValueDays(data[this.keyObj])
                 : getValueDays(data[this.keyObj], this.population);
@@ -77,9 +74,7 @@ export class DrawGraph {
 
     addEventListeners(data) {
         const graphWrapper = document.querySelector(".graph");
-        const graphCanvas = document.querySelector(".canvas-board");
         const wrapperCanvasForRemove = document.querySelector(".graph-wrapper-canvas");
-        graphCanvas.removeAttribute("style");
 
         graphWrapper.addEventListener("change", (event) => {
             if (event.target.closest(".draw-graph-select")) {
