@@ -1,10 +1,10 @@
 .graph {
     width: 100%;
     height: 25%;
-    border: 2px solid #f00bab;
     display: flex;
     justify-content: space-between;
     position: relative;
+    background-color: $blue;
 
     .base-markup-btn-increase {
         position: absolute;
@@ -35,7 +35,7 @@
     }
     .draw-graph-switch {
         font-size: 44px;
-        background: #2c21292f;
+        background: $blue;
         border: none;
         color: rgba(157, 163, 163, 0.637);
         width: 10%;
@@ -44,7 +44,7 @@
         transition: 0.3s linear;
 
         &:hover {
-            background: #251c23ab;
+            background: $darkblue;
             color: rgb(207, 219, 214);
         }
     }
@@ -55,6 +55,11 @@
 
     .draw-graph-right {
         order: 4;
+    }
+    .draw-graph-right, .draw-graph-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .graph-wrapper-canvas {
         width: 35%;
@@ -124,10 +129,6 @@
     option {
         background: #000000e8;
         border: 1px #0a0a0a solid;
-
-        &:hover {
-            background: #f00bab;
-        }
     }
 }
 
@@ -138,7 +139,7 @@
     margin: 0 auto;
     width: 90%;
     height: 90%;
-    background: #2c0f0f;
+    background: $blue;
     z-index: 1200;
     canvas {
         position: relative;

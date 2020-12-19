@@ -1,6 +1,6 @@
 export const chartTemplate = (lastUpdate) => {
     return `
-<div class = "country-list-title">last update: ${lastUpdate} </div>
+<div class = "country-list-title">last update:<br> ${lastUpdate} </div>
 <ul class ="country-list-countries-wrapper"></ul>
 <div class ="country-list-country-search">
 <input class="country-list-country-input use-keyboard-input" placeholder="Search...">

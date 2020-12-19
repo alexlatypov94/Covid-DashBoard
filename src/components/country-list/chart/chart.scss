@@ -1,4 +1,4 @@
-$colour-country-list-hover: #471919;
+$colour-country-list-hover: $darkblue;
 
 ul li {
 	list-style: none;
@@ -6,7 +6,7 @@ ul li {
 
 .country-list-title {
 	text-align: center;
-	font-size: large;
+	@include large-size;
 }
 
 .country-list-flag {
@@ -17,41 +17,17 @@ ul li {
 }
 
 .country-list-countries-wrapper {
-	height: calc(85vh-100px);
+	height: calc(85vh-130px);
 	overflow-y: scroll;
 	padding-left: 0px;
 	margin: 5px 0;
-	&::-webkit-scrollbar {
-		width: 5px;
-		height: 5px;
-	}
-	&::-webkit-scrollbar-button {
-		width: 10px;
-		background-color: #666;
-	}
-	&::-webkit-scrollbar-track {
-		background-color: #999;
-	}
-	&::-webkit-scrollbar-track-piece {
-		background-color: #ffffff;
-	}
-	&::-webkit-scrollbar-thumb {
-		height: 1px;
-		background-color: #666;
-		border-radius: 5px;
-	}
-	&::-webkit-scrollbar-corner {
-		background-color: #999;
-	}
-	&::-webkit-resizer {
-		background-color: #666;
-	}
+	background-color: $blue;
+@include scroll;
 }
 .country-list-country-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-family: sans-serif;
 	min-height: 40px;
 	margin: 2px 0;
 	border-bottom: white 1px solid;
@@ -67,8 +43,9 @@ ul li {
 	text-align: center;
 }
 .country-list-value {
-	color: yellow;
+	color: $red;
 	margin-right: 5px;
+	@include medium-size;
 }
 .country-list-country-search {
 	display: flex;
@@ -83,6 +60,12 @@ ul li {
 	border: none;
 	color: white;
 	outline: none;
+	padding: 5px;
+
+	&::placeholder {
+		display: block;
+		padding-left: 10px;
+	}
 }
 .country-list-keyboard {
 	display: flex;
