@@ -1,9 +1,10 @@
 @import "../../components/country-list/country-list.component.scss";
+@import "../../components/keyboard/keyboard.component.scss";
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 h1,
@@ -13,14 +14,14 @@ h4,
 h5,
 h6,
 p {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    background: #2c0f0f;
-    margin: 0;
-    padding: 0 30px;
+	background: #2c0f0f;
+	margin: 0;
+	padding: 0 30px;
 }
 
 

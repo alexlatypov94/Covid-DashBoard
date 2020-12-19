@@ -1,6 +1,7 @@
 import { CovidDashboardService } from "../../core/index";
 import { Chart } from "./chart/index";
 import { countryListTemplate } from "./country-list.template";
+import { Keyboard } from "../keyboard/index";
 
 export class CountryList {
     constructor() {
@@ -18,11 +19,14 @@ export class CountryList {
     viewData(data) {
         this.chart.init(data);
         this.chart.render(data);
+        Keyboard.init();
 
-        const input = document.querySelector(".country-list-country-input");
+        setInterval(() => this.chart.search(), 1000);
 
-        input.addEventListener("keyup", () => {
-            this.chart.search();
+        const keyboardButton = document.querySelector(".country-list-keyboard");
+
+        keyboardButton.addEventListener("click", () => {
+            document.querySelector(".keyboard--hidden") ? Keyboard.show() : Keyboard.hide();
         });
     }
 }
