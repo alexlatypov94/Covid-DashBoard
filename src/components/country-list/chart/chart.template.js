@@ -12,7 +12,7 @@ export const countryTemplate = (countryCode, countryFlag, country, value) => {
     return `
 <li class ="country-list-country-wrapper" data-country ="${countryCode}">
 	<span><img class="country-list-flag" src="${countryFlag}"></span>
-	<span class="country-list-country-name">${country}</span>
+	<span class="country-list-country-name" data-country-name ="${country}">${country}</span>
 	<div class="country-list-value ">${value}</div>
 </li>
 `;
