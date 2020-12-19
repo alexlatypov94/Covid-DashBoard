@@ -43,8 +43,8 @@ export const Keyboard = {
     },
 
     hide() {
-        this.close();
         this.triggerEvent("onclose");
+        this.close();
     },
 
     createKeys() {
