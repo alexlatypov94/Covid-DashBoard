@@ -19,7 +19,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
         options: {
             legend: {
                 labels: {
-                    fontSize: 24
+                    fontSize: 14
                 }
             },
             scales: {
@@ -31,7 +31,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                             fontSize: 14,
 
                             "callback": function (value) {
-                                const newValue = value.toString().length > 4 ? `${value / 1000000}M` : value;
+                                const newValue = value.toString().length > 4 ? `${value / 10e5}M` : value;
 
                                 return newValue;
                             }

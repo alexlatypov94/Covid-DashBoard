@@ -1,5 +1,5 @@
 import { CovidDashboardService, COLOR_PALETTE } from "../../core/index";
-import { sortData, updateDataForHundreed } from "./utils/index";
+import { sortData, updateDataForHundreed, getGlobalDivision } from "./utils/index";
 import { globalTableTemplate, totalCaseWrapperTemplate, radioButton } from "./global-table.template";
 
 export class GlobalTable {
@@ -40,7 +40,9 @@ export class GlobalTable {
         const globalTable = document.querySelector(".global-table");
         const categoryName = `Global ${this.titleCurrentCategory}`;
         const tableName = `Global ${this.titleCurrentCategory}`;
-        const globalAmount = Number(sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3));
+        const globalAmount = !this.checkDataPopulations
+            ? Number(sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3))
+            : getGlobalDivision(data, this.param);
 
         globalTable.innerHTML = "";
         globalTable.insertAdjacentHTML(
@@ -84,9 +86,7 @@ export class GlobalTable {
     }
 
     onSwithStatistics(event, data, amount) {
-        let counter = event.target.closest(".left-change")
-            ? this.counterForSwitch - 1
-            : this.counterForSwitch + 1;
+        let counter = event.target.closest(".left-change") ? this.counterForSwitch - 1 : this.counterForSwitch + 1;
 
         /* The switch button has three positions:
             1. 0 this is Cases position
