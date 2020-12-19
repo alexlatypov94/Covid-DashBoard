@@ -2,12 +2,13 @@
 
 .country-list {
 	position: relative;
-	min-height: 100%;
+	min-height: 85%;
 }
 .country-list-wrapper {
 	padding: 5px;
 	padding-bottom: 40px;
 	color: white;
+	overflow: hidden;
 }
 .country-list-switch-wrapper {
 	position: absolute;

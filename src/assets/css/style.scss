@@ -23,17 +23,86 @@ body {
     padding: 0 30px;
 }
 
+
+header {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .header-title {
+        order: 1;
+        text-transform: uppercase;
+        color: beige;
+        font-size: 18px;
+    }
+
+    .header-logo {
+        margin-right: 10px;
+        order: 0;
+        width: 20px;
+    }
+}
+
+footer {
+    margin-top: 10px;
+    .footer-dev-ops {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .dev-ops-list {
+            order: 1;
+            margin: 2px 0;
+            display: flex;
+            .dev-ops-list-person {
+                color: beige;
+                margin-right: 10px;
+                .dev-ops-ref {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    color: beige;
+                    .footer-github-logo {
+                        width: 15px;
+                        margin-right: 5px;
+                    }
+                }
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .footer-create-year {
+        font-size: 20px;
+        color: beige;
+        order: 0;
+    }
+
+    .footer-rs-ref {
+        order: 2;
+        .footer-rs-logo {
+            order: 2;
+            width: 70px;
+        }
+    }
+
+    
+}
+
 .wrapper {
     display: flex;
     width: 100%;
     min-width: 1024px;
-    height: 100vh;
+    height: 85vh;
     margin: 0 auto;
     border: 3px solid #f0e00b;
     .country-list {
         width: 20%;
         border: 2px solid #f0e00b;
-        height: 100vh;
+        height: 85vh;
     }
 
     .wrapper-for-map {
@@ -41,7 +110,7 @@ body {
         border: 2px solid #0bf03d;
         .world-map {
             width: 100%;
-            height: 80%;
+            height: 75%;
             border: 2px solid #220bf0;
         }
     }
