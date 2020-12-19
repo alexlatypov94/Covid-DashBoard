@@ -12,8 +12,8 @@
     justify-content: center;
     align-items: center;
     color: white;
-    width: 3.6em;
-    height: 3.6em;
+    width: 3em;
+    height: 3em;
     font-size: 0.7em;
     font-weight: bold;
     border-radius: 100%;
@@ -27,23 +27,23 @@
 }
 
 span[data-color="red"] {
-    background-color: rgb(255, 0, 0);
+    background-color: $red;
 }
 
 span[data-color="orange"] {
-    background-color: rgb(255, 115, 0);
+    background-color: $orange;
 }
 
 span[data-color="yellow"] {
-    background-color: rgb(245, 241, 22);
+    background-color: $yellow;
 }
 
 span[data-color="blue"] {
-    background-color: rgb(0, 225, 255);
+    background-color:$lightblue;
 }
 
 span[data-color="green"] {
-    background-color: rgb(94, 255, 0);
+    background-color: $green;
 }
 
 .icon-marker-tooltip {
@@ -53,7 +53,7 @@ span[data-color="green"] {
     width: 16em;
     font-size: 1.4em;
     padding: 1em;
-    background-color: rgb(15, 138, 132);
+    background-color: $dark-aqua;
     border-radius: 0.4em;
     margin-bottom: 1em;
     box-shadow: 0 3px 5px rgba(black, 0.9);
@@ -66,7 +66,7 @@ span[data-color="green"] {
         content: "";
         width: 1.4em;
         height: 1.4em;
-        background-color: rgb(15, 138, 132);
+        background-color: $dark-aqua;
         transform: rotate(45deg);
         margin-left: -0.7em;
     }
@@ -82,7 +82,7 @@ span[data-color="green"] {
         font-size: 1.2em;
         margin: 0.1em 0;
         font-weight: normal;
-        color: rgb(125, 241, 236);
+        color: $light-aqua;
     }
 
     ul,
@@ -100,7 +100,7 @@ span[data-color="green"] {
 .mapButtons {
     width: 100%;
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     left: 0;
     margin: 0;
     padding: 0;
@@ -116,12 +116,27 @@ span[data-color="green"] {
             padding: 5px;
             width: 100%;
             cursor: pointer;
-            background-color: #2c0f0f;
-            color: #ff0000;
-
-            &:hover {
-                color: #ffffff;
-            }
+            
+            @include main-btn-style;
         }
+    }
+}
+
+.leaflet-bottom {
+    bottom: 30px;
+    background-color: $darkblue;
+    color: white;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    background: $darkblue;
+    a {
+        color:$white;
+       } 
+
+    &:hover {
+       a {
+        color: $lightblue;
+       } 
     }
 }

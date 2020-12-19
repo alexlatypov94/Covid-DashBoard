@@ -1,5 +1,3 @@
-import "./legendMap.scss";
-
 export function legendMap(parent = document.querySelector(".world-map")) {
     const legendBtn = document.createElement("button");
     legendBtn.classList.add("legendBtn");
