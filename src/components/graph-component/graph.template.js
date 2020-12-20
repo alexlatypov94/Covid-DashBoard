@@ -32,6 +32,8 @@ export const toggleForGraph = `
     <select class = "draw-graph-select">
         <option class = "draw-graph-general">Cumulative</option>
         <option class = "draw-graph-general">Day</option>
+        <option class = "draw-graph-general">Cumulative/100</option>
+        <option class = "draw-graph-general">Day/100</option>
     </select>
     </div>
     

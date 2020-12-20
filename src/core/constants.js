@@ -22,3 +22,12 @@ export const COLOR_PALETTE = {
     GREY: "#9698a8",
     RED: "rgb(233, 66, 62)"
 };
+
+export const GLOBAL_SELECTORS = {
+    left: ["draw-graph-left", "global-table-left-change", "country-list-left-change", "mapButtons__item-left"],
+    right: ["draw-graph-right", "global-table-right-change", "country-list-right-change", "mapButtons__item-right"]
+};
+
+export const RADIO_ATTRIBUTE = ["total", "new", "general-hundreed", "day-hundreed"];
+
+export const ITEMS__COUNTRY = ["country-list-country-wrappercountry-list-country-wrapper", "global-table-table-item"];

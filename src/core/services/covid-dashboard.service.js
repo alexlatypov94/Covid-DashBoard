@@ -110,9 +110,9 @@ export class CovidDashboardService {
     getFullInformationChooseCountry(country) {
         return this.apiService.getApiForChooseCountry(country).then((res) => {
             return {
-                totalCases: res.timeline?.cases,
-                totalDeaths: res.timeline?.deaths,
-                totalRecovered: res.timeline?.recovered,
+                totalCases: res?.timeline?.cases,
+                totalDeaths: res?.timeline?.deaths,
+                totalRecovered: res?.timeline?.recovered,
             }
         });
     }

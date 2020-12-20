@@ -33,7 +33,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                             fontSize: 12,
 
                             callback: function (value) {
-                                const newValue = value.toString().length > 4 ? `${value / 10e5}M` : value;
+                                const newValue = value.toString().length > 4 ? `${(value / 10e5)}M` : value;
 
                                 return newValue;
                             }

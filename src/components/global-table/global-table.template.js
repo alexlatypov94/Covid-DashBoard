@@ -49,12 +49,12 @@ export const radioButton = `
         <form class = "global-table-checkbox-wrapper">
             <div class = "global-table-radio-single">
                 <label for = "check-global-death" data-attribute = "total">General</label>
-                <input type = "radio" name = "global-table" class = "global-table-radio-btn" id = "check-global-death" checked>
+                <input type = "radio" name = "global-table" class = "global-table-radio-btn cumulative" id = "check-global-death" checked>
                 <label for = "check-global-death" class = "global-table-style-radio-btn" data-attribute = "total"></label>
             </div>
             <div class = "global-table-radio-single">
                 <label for = "check-global-received" data-attribute = "new">day</label>
-                <input type = "radio" name = "global-table" class = "global-table-radio-btn" id = "check-global-received"> 
+                <input type = "radio" name = "global-table" class = "global-table-radio-btn day" id = "check-global-received"> 
                 <label for = "check-global-received" class = "global-table-style-radio-btn" data-attribute = "new"></label>
             </div>
             <div class = "global-table-radio-single">
@@ -68,12 +68,13 @@ export const radioButton = `
                 <label for = "received-hundreed" class = "global-table-style-radio-btn" data-attribute = "day-hundreed"></label>
             </div>
         </form>
+        
         <div class = "global-table"></div>
     `;
 
-export const totalCaseWrapperTemplate = (color, populations, title, country) => {
+export const totalCaseWrapperTemplate = (color, populations, title, country, iso) => {
     return `
-    <div class = "global-table-table-item">
+    <div class = "global-table-table-item" data-countryIso = "${iso}" data-countryFull = "${country}">
         <div class = "${color}">
             <span class = "global-table-total-number">${populations}</span>
                 ${title}
