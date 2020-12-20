@@ -29,7 +29,7 @@ export const Keyboard = {
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
 
         this.elements.main.appendChild(this.elements.keysContainer);
-        const kwyboarWrapper = document.querySelector(".country-list");
+        const kwyboarWrapper = document.querySelector(".graph");
         kwyboarWrapper.appendChild(this.elements.main);
     },
 

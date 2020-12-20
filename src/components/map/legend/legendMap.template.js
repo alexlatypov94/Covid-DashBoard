@@ -1,7 +1,17 @@
 export function legendMap(parent = document.querySelector(".world-map")) {
     const legendBtn = document.createElement("button");
     legendBtn.classList.add("legendBtn");
-    legendBtn.innerHTML = "Legend";
+    legendBtn.innerHTML = `
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+`;
 
     const legendMapContainer = document.createElement("div");
     legendMapContainer.classList.add("legendMapContainer");
@@ -16,8 +26,10 @@ export function legendMap(parent = document.querySelector(".world-map")) {
     <li><span class="legendMapIcon legendMapIcon-green"></span>0 - 100</li>
   </ul>
   `;
-    legendBtn.addEventListener("click", () => legendMapContainer.classList.toggle("active"));
-
+    legendBtn.addEventListener("click", () => {
+        legendMapContainer.classList.toggle("active");
+        legendBtn.classList.toggle("clicked");
+    });
     legendMapContainer.insertAdjacentHTML("beforeend", legendList);
 
     parent.append(legendBtn);

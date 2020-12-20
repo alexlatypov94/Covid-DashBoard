@@ -5,15 +5,16 @@
     justify-content: space-between;
     position: relative;
     background-color: $blue;
+    overflow: hidden;
 
     .base-markup-btn-increase {
         position: absolute;
         z-index: 1100;
         width: 20px;
         height: 20px;
-        right: -2px;
-        top: -20px;
-        background: #666663;
+        right: 2px;
+        top: 2px;
+        background: $white;
         border: 1px solid #0a0a0a;
         padding: 0;
         display: flex;
@@ -21,16 +22,18 @@
         justify-content: center;
         cursor: pointer;
         outline: none;
-        opacity: 0;
         visibility: hidden;
         transition: 0.5s linear;
         img {
             width: 80%;
         }
+
+        &:hover {
+            background: $lightblue;
+        }
     }
 
     &:hover .base-markup-btn-increase {
-        opacity: 1;
         visibility: visible;
     }
     .draw-graph-switch {
