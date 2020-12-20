@@ -18,6 +18,7 @@ export class CountryList {
 
     viewData(data) {
         this.chart.init(data);
+        this.chart.log(data);
         this.chart.render(data);
         Keyboard.init();
 

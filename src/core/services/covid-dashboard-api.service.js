@@ -1,5 +1,5 @@
+import * as fetch from "node-fetch";
 import { API_URL, URL, API_URL_FLAGS_POPULATION, COUNTRIES, API_FOR_GRAPH_GLOBAL } from "../constants";
-
 /**
  * COVID19 API Service
  * See more: https://documenter.getpostman.com/view/10808728/SzS8rjbc
@@ -38,15 +38,14 @@ export class CovidDashBoardApiService {
     getApiIntensityCases() {
         return fetch(`${API_FOR_GRAPH_GLOBAL}`)
             .then((res) => this.getStatus(res))
-            .catch((err) => err)
+            .catch((err) => err);
     }
 
-    getApiForChooseCountry(country){
+    getApiForChooseCountry(country) {
         return fetch(`https://disease.sh/v3/covid-19/historical/${country}?lastdays=all`)
-        .then((res) => this.getStatus(res))
-        .catch((err) => err)
+            .then((res) => this.getStatus(res))
+            .catch((err) => err);
     }
-
 
     getStatus(res) {
         return res?.status >= 200 && res?.status < 300 ? res?.json() : undefined;
