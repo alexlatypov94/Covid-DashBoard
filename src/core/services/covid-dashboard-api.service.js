@@ -1,5 +1,5 @@
+import * as fetch from "node-fetch";
 import { API_URL, URL, API_URL_FLAGS_POPULATION, COUNTRIES, API_FOR_GRAPH_GLOBAL } from "../constants";
-
 /**
  * COVID19 API Service
  * See more: https://documenter.getpostman.com/view/10808728/SzS8rjbc

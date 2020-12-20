@@ -1,7 +1,8 @@
 module.exports = {
     env: {
         browser: true,
-        es6: true
+        es6: true,
+        "jest/globals": true
     },
     extends: ["airbnb-base", "prettier"],
     parser: "babel-eslint",
@@ -18,5 +19,6 @@ module.exports = {
         "import/export": "off",
         "class-methods-use-this": "off",
         "no-unused-expressions": "off"
-    }
+    },
+    plugins: ["jest"]
 };
