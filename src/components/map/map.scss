@@ -39,7 +39,7 @@ span[data-color="yellow"] {
 }
 
 span[data-color="blue"] {
-    background-color:$lightblue;
+    background-color: $lightblue;
 }
 
 span[data-color="green"] {
@@ -97,7 +97,8 @@ span[data-color="green"] {
             padding: 5px;
             width: 100%;
             cursor: pointer;
-            
+            height: 100%;
+
             @include main-btn-style;
         }
     }
@@ -112,12 +113,16 @@ span[data-color="green"] {
 .leaflet-container .leaflet-control-attribution {
     background: $darkblue;
     a {
-        color:$white;
-       } 
+        color: $white;
+    }
 
     &:hover {
-       a {
-        color: $lightblue;
-       } 
+        a {
+            color: $lightblue;
+        }
     }
+}
+
+//
+@media (max-width: 1100px) {
 }

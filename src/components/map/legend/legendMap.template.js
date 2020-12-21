@@ -26,9 +26,23 @@ export function legendMap(parent = document.querySelector(".world-map")) {
     <li><span class="legendMapIcon legendMapIcon-green"></span>0 - 100</li>
   </ul>
   `;
+
+    const closeLegend = () => {
+        document.querySelector("body").addEventListener(
+            "click",
+            (e) => {
+                const container = document.querySelector(".legendMapContainer");
+                if (!e.target.closest(".legendMapContainer ") && container.classList.contains("active")) {
+                    legendMapContainer.classList.toggle("active");
+                }
+            },
+            true
+        );
+    };
     legendBtn.addEventListener("click", () => {
         legendMapContainer.classList.toggle("active");
         legendBtn.classList.toggle("clicked");
+        closeLegend();
     });
     legendMapContainer.insertAdjacentHTML("beforeend", legendList);
 

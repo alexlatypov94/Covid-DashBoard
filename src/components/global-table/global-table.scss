@@ -12,9 +12,7 @@ $global-table-color-white: #ffffff;
 $global-table-stat-color: #ebcbcb;
 
 .table {
-    padding: 0 0.56rem;
     padding-right: 0;
-    width: 20%;
     display: flex;
     color: $global-table-title-color-for-death;
     font-weight: normal;
@@ -29,20 +27,19 @@ $global-table-stat-color: #ebcbcb;
         padding: 5px;
         margin-bottom: 10px;
         background-color: $blue;
-      
 
         .global-table-radio-single {
             display: flex;
             align-items: center;
             justify-content: space-between;
-           
+
             margin-bottom: 5px;
             text-transform: uppercase;
             width: 42%;
 
             &:nth-child(odd) {
                 width: 52%;
-              }
+            }
 
             .global-table-radio-btn {
                 display: none;
@@ -57,7 +54,7 @@ $global-table-stat-color: #ebcbcb;
                 cursor: pointer;
             }
 
-            .global-table-radio-btn:checked + .global-table-style-radio-btn {
+            .global-table-radio-btn:checked+.global-table-style-radio-btn {
                 background-color: $red;
             }
         }
@@ -68,10 +65,12 @@ $global-table-stat-color: #ebcbcb;
         display: flex;
         flex-direction: column;
         overflow: hidden;
+
         .global-table-title {
             @include large-size;
             text-align: center;
         }
+
         .global-table-amount-global-case {
             text-align: center;
         }
@@ -93,6 +92,7 @@ $global-table-stat-color: #ebcbcb;
             justify-content: space-between;
             align-items: center;
             margin-top: 0.28rem;
+            width: 100%;
 
             .global-table-btn-changes {
                 background: none;
@@ -113,7 +113,7 @@ $global-table-stat-color: #ebcbcb;
             overflow: scroll;
             overflow-x: hidden;
             background-color: $blue;
-           @include scroll;
+            @include scroll;
 
             .global-table-table-item {
                 border-top: 2px solid $global-table-color-for-death;

@@ -161,6 +161,7 @@ export const Keyboard = {
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
         this.elements.main.classList.remove("keyboard--hidden");
+        this.closeKeyboard();
     },
 
     close() {
@@ -168,5 +169,17 @@ export const Keyboard = {
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
         this.elements.main.classList.add("keyboard--hidden");
+    },
+
+    closeKeyboard() {
+        document.querySelector("body").addEventListener(
+            "click",
+            (e) => {
+                if (!e.target.closest(".keyboard")) {
+                    this.hide();
+                }
+            },
+            true
+        );
     }
 };
