@@ -27,23 +27,28 @@ export function legendMap(parent = document.querySelector(".world-map")) {
   </ul>
   `;
 
-    const closeLegend = () => {
-        document.querySelector("body").addEventListener(
-            "click",
-            (e) => {
-                const container = document.querySelector(".legendMapContainer");
-                if (!e.target.closest(".legendMapContainer ") && container.classList.contains("active")) {
-                    legendMapContainer.classList.toggle("active");
-                }
-            },
-            true
-        );
+    const close = (e) => {
+        if (
+            !e.target.closest(".legendMapContainer") &&
+            !e.target.closest(".legendBtn") &&
+            legendMapContainer.classList.contains("active")
+        ) {
+            legendMapContainer.classList.remove("active");
+            legendBtn.classList.remove("clicked");
+            document.querySelector("body").removeEventListener("click", close);
+        }
     };
+
+    const closeLegend = () => {
+        document.querySelector("body").addEventListener("click", close);
+    };
+
     legendBtn.addEventListener("click", () => {
         legendMapContainer.classList.toggle("active");
         legendBtn.classList.toggle("clicked");
         closeLegend();
     });
+
     legendMapContainer.insertAdjacentHTML("beforeend", legendList);
 
     parent.append(legendBtn);
