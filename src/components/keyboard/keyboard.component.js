@@ -100,6 +100,7 @@ export const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
                         this.triggerEvent("oninput");
+                        playAydio("../../assets/audio/click.mp3");
                     });
 
                     break;
@@ -111,6 +112,7 @@ export const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.close();
                         this.triggerEvent("onclose");
+                        playAydio("../../assets/audio/click.mp3");
                     });
 
                     break;
@@ -122,6 +124,7 @@ export const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.properties.value += " ";
                         this.triggerEvent("oninput");
+                        playAydio("../../assets/audio/click.mp3");
                     });
 
                     break;
@@ -132,6 +135,7 @@ export const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
                         this.triggerEvent("oninput");
+                        playAydio("../../assets/audio/click.mp3");
                     });
 
                     break;
@@ -153,7 +157,6 @@ export const Keyboard = {
             this.eventHandlers[handlerName](this.properties.value);
         }
         input.focus();
-        playAydio("../../assets/audio/click.mp3");
     },
 
     open(initialValue, oninput, onclose) {

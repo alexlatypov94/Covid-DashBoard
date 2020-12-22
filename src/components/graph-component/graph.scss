@@ -69,7 +69,7 @@
     }
 
     .graph-wrapper-canvas {
-        width: 35%;
+        width: 100%;
         display: flex;
         justify-content: center;
         order: 2;
@@ -163,8 +163,7 @@
 
 .canvas-board {
     position: absolute;
-    width: 215px;
     left: 50%;
-    top: 50%;
+		top: 50%;
     transform: translate(-50%, -50%);
 }
