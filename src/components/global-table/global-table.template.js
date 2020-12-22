@@ -1,3 +1,5 @@
+import "./global-table.scss";
+
 export const globalTableTemplate = (categoryName, tableName, amount, color) => {
     return `
             <h6 class = "global-table-title">${tableName}</h6>

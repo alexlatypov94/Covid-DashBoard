@@ -1,4 +1,5 @@
 import { playAydio } from "../../core/index";
+import "./keyboard.component.scss";
 
 export const Keyboard = {
     elements: {

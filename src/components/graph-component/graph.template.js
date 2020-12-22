@@ -1,3 +1,5 @@
+import "./graph.scss";
+
 export const graphWrapperCanvas = `
     <div class = "graph-wrapper-canvas"></div>
 `;

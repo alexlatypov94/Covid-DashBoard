@@ -1,3 +1,5 @@
+import "./country-list.component.scss";
+
 export const countryListTemplate = `
 <div class = "country-list-wrapper">
   <div class="country-list-switch-wrapper arrow-buttons">
