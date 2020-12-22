@@ -2,10 +2,11 @@ import * as L from "leaflet";
 import { mapComponent } from "./map.template";
 import { CovidDashboardService } from "../../core/services/covid-dashboard.service";
 import { legendMapHandler } from "./legend/index";
-import "./map.scss";
 
 export class MapCovied {
     constructor() {
+        this.mapApiLink =
+            "https://api.mapbox.com/styles/v1/a-dubich12/ckivwnm1449eo19rp13zvgrlv/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYS1kdWJpY2gxMiIsImEiOiJja2l2d3hrbGMxamlhMnluNDdobG03Z2dkIn0.uhYDJIilVqJZsDjTwcmdWg";
         this.service = new CovidDashboardService();
         this.mapOptions = {
             center: [38.9072, -77.0369],
@@ -75,9 +76,7 @@ export class MapCovied {
 
     createMap(optionValue = "totalCases") {
         const map = new L.map("map", this.mapOptions);
-        const layer = new L.TileLayer(
-            "https://api.mapbox.com/styles/v1/a-dubich12/ckinaajq421by17ln58g3yk5w/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYS1kdWJpY2gxMiIsImEiOiJja2luYW4yMHIwbW85MnFwMzNtbjN6NnA4In0.umEsEDfqpq8U8GjB06jKwA"
-        );
+        const layer = new L.TileLayer(this.mapApiLink);
         map.addLayer(layer);
 
         // coordinates that limit the movement of the map on the right

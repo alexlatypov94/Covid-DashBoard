@@ -3,7 +3,7 @@ import "./legendMap.scss";
 export function legendMap(parent = document.querySelector(".world-map")) {
     const legendBtn = document.createElement("button");
     legendBtn.classList.add("legendBtn");
-    legendBtn.innerHTML = "Legend";
+    legendBtn.innerHTML = '<div class="dot"></div>'.repeat(9);
 
     const legendMapContainer = document.createElement("div");
     legendMapContainer.classList.add("legendMapContainer");
@@ -18,7 +18,28 @@ export function legendMap(parent = document.querySelector(".world-map")) {
     <li><span class="legendMapIcon legendMapIcon-green"></span>0 - 100</li>
   </ul>
   `;
-    legendBtn.addEventListener("click", () => legendMapContainer.classList.toggle("active"));
+
+    const close = (e) => {
+        if (
+            !e.target.closest(".legendMapContainer") &&
+            !e.target.closest(".legendBtn") &&
+            legendMapContainer.classList.contains("active")
+        ) {
+            legendMapContainer.classList.remove("active");
+            legendBtn.classList.remove("clicked");
+            document.querySelector("body").removeEventListener("click", close);
+        }
+    };
+
+    const closeLegend = () => {
+        document.querySelector("body").addEventListener("click", close);
+    };
+
+    legendBtn.addEventListener("click", () => {
+        legendMapContainer.classList.toggle("active");
+        legendBtn.classList.toggle("clicked");
+        closeLegend();
+    });
 
     legendMapContainer.insertAdjacentHTML("beforeend", legendList);
 

@@ -1,3 +1,5 @@
+import "./map.scss";
+
 export function mapComponent(parent) {
     const element = document.createElement("div");
     element.setAttribute("id", "map");

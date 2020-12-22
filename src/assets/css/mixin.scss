@@ -1,0 +1,109 @@
+$red: rgb(233, 66, 62);
+$orange: rgb(253, 153, 18);
+$yellow: rgb(250, 235, 31);
+$green: rgb(36, 199, 159);
+$lightblue: rgb(10, 179, 200);
+$blue: rgb(27, 42, 71);
+$white: rgb(255, 255, 255);
+$darkblue: #081424;
+$light-aqua: rgb(78, 205, 196);
+$dark-aqua: rgb(67, 177, 169);
+$grey: #f4f4f4;
+@mixin large-size {
+    font-size: 18px;
+    line-height: 140%;
+    text-transform: uppercase;
+}
+@mixin medium-size {
+    font-size: 16px;
+    line-height: 140%;
+}
+
+@mixin scroll {
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    &::-webkit-scrollbar-button {
+        width: 10px;
+        background-color: $white;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: $blue;
+    }
+    &::-webkit-scrollbar-track-piece {
+        background-color: #ffffff;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 1px;
+        background-color: $lightblue;
+        border-radius: 5px;
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: $lightblue;
+    }
+    &::-webkit-resizer {
+        background-color: $lightblue;
+    }
+}
+
+@mixin main-btn-style {
+    border: 1px solid $white;
+    background-color: $darkblue;
+    color: $white;
+
+    &:hover {
+        color: $lightblue;
+    }
+}
+
+@mixin animation($animation) {
+    -webkit-animation: #{$animation};
+    -moz-animation: #{$animation};
+    -o-animation: #{$animation};
+    animation: #{$animation};
+}
+
+@mixin animation-delay($animation-delay) {
+    -webkit-transition-delay: #{$animation-delay};
+    -moz-transition-delay: #{$animation-delay};
+    -o-transition-delay: #{$animation-delay};
+    transition-delay: #{$animation-delay};
+}
+
+@mixin keyframes($keyframes) {
+    @-webkit-keyframes #{$keyframes} {
+        @content;
+    }
+    @-moz-keyframes #{$keyframes} {
+        @content;
+    }
+    @-o-keyframes #{$keyframes} {
+        @content;
+    }
+    @keyframes #{$keyframes} {
+        @content;
+    }
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+}
+
+@mixin transition($transition...) {
+    -webkit-transition: #{$transition};
+    -moz-transition: #{$transition};
+    -o-transition: #{$transition};
+    transition: #{$transition};
+}
+
+@mixin transition-delay($transition-delay) {
+    -webkit-transition-delay: #{$transition-delay};
+    -moz-transition-delay: #{$transition-delay};
+    -o-transition-delay: #{$transition-delay};
+    transition-delay: #{$transition-delay};
+}

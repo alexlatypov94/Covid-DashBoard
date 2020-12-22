@@ -18,7 +18,7 @@ export const API_FOR_GRAPH_GLOBAL = "https://disease.sh/v3/covid-19/historical/a
 export const ONE_HUNDREED = 100000;
 
 export const COLOR_PALETTE = {
-    GREEN: "#0bf03d",
+    GREEN: " rgb(36, 199, 159)",
     GREY: "#9698a8",
-    RED: "#f00b0b"
+    RED: "rgb(233, 66, 62)"
 };

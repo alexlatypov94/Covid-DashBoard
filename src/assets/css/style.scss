@@ -1,10 +1,9 @@
-@import "../../components/country-list/country-list.component.scss";
-@import "../../components/keyboard/keyboard.component.scss";
+@import "./mixin.scss";
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 h1,
@@ -14,27 +13,36 @@ h4,
 h5,
 h6,
 p {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	background: #2c0f0f;
-	margin: 0;
-	padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: $darkblue;
+    margin: 0;
+    padding: 0 30px;
+    font-family: Quicksand, sans-serif;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
+button {
+    outline-color: $lightblue;
+}
 
 header {
-    padding: 10px 0;
+    padding: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+
     .header-title {
         order: 1;
         text-transform: uppercase;
         color: beige;
-        font-size: 18px;
+        font-size: 25px;
     }
 
     .header-logo {
@@ -45,24 +53,34 @@ header {
 }
 
 footer {
-    margin-top: 10px;
+    width: 100%;
+    max-width: 1200px;
+    background-color: $blue;
+    padding: 15px 30px;
+    margin: 0 auto;
+    margin-top: 5px;
+
     .footer-dev-ops {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+        flex-wrap: wrap;
+
         .dev-ops-list {
             order: 1;
             margin: 2px 0;
             display: flex;
+
             .dev-ops-list-person {
                 color: beige;
                 margin-right: 10px;
+
                 .dev-ops-ref {
                     display: flex;
                     align-items: center;
                     text-decoration: none;
                     color: beige;
+
                     .footer-github-logo {
                         width: 15px;
                         margin-right: 5px;
@@ -84,35 +102,237 @@ footer {
 
     .footer-rs-ref {
         order: 2;
+
         .footer-rs-logo {
             order: 2;
             width: 70px;
         }
     }
-
-    
 }
 
 .wrapper {
-    display: flex;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-areas: "table map country";
+
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 82vh;
+    grid-gap: 5px;
     width: 100%;
-    min-width: 1024px;
-    height: 85vh;
+    max-width: 1200px;
     margin: 0 auto;
-    border: 3px solid #f0e00b;
+
     .country-list {
-        width: 20%;
-        border: 2px solid #f0e00b;
-        height: 85vh;
+        grid-area: country;
     }
 
     .wrapper-for-map {
-        width: 60%;
-        border: 2px solid #0bf03d;
+        grid-area: map;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
+
         .world-map {
             width: 100%;
-            height: 75%;
-            border: 2px solid #220bf0;
+        }
+    }
+
+    .table {
+        grid-area: table;
+    }
+}
+
+// ---------------------left-and-right-btn-----------
+
+.arrow-buttons {
+    // width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $white;
+}
+
+.arrow-btn {
+    overflow: hidden;
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+
+    border: none;
+    background-color: transparent;
+}
+
+.arrow-btn svg {
+    width: 20px;
+    height: auto;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    overflow: visible;
+}
+
+.arrow-btn svg polygon,
+.arrow-btn svg path {
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+    fill: $white;
+}
+
+.arrow-btn svg:hover polygon,
+.arrow-btn svg:hover path {
+    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+    fill: $lightblue;
+}
+
+.arrow-btn svg:hover .arrow-6-pl {
+    animation: arrow-6-anim 1s cubic-bezier(0.2, 1, 0.3, 1) infinite;
+}
+
+.arrow-btn svg:hover .arrow-6-pl-fixed {
+    animation: arrow-6-fixed-anim 1s cubic-bezier(0.2, 1, 0.3, 1) infinite;
+}
+
+@keyframes arrow-6-anim {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    5% {
+        transform: translateX(-0.1rem);
+    }
+
+    100% {
+        transform: translateX(1rem);
+        opacity: 0;
+    }
+}
+
+@keyframes arrow-6-fixed-anim {
+    5% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+//
+
+@media (max-width: 1100px) {
+    .wrapper {
+        display: grid;
+        grid-template-areas:
+            "map table"
+            "map country";
+
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: 51vh 41vh;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .country-list {
+            grid-area: country;
+            // height: 85vh;
+        }
+
+        .wrapper-for-map {
+            grid-area: map;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 100%;
+
+            .world-map {
+                width: 100%;
+            }
+        }
+
+        .table {
+            grid-area: table;
+        }
+    }
+}
+
+@media (max-width: 864px) {
+    .wrapper {
+        display: grid;
+        grid-template-areas:
+            "table country"
+            "map map";
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 40vh 81vh;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .country-list {
+            grid-area: country;
+        }
+
+        .wrapper-for-map {
+            grid-template-rows: 40% 60%;
+
+            grid-template-areas:
+                "graph"
+                "content";
+
+            .world-map {
+                grid-area: content;
+                width: 100%;
+            }
+
+            .graph {
+                grid-area: graph;
+            }
+        }
+    }
+
+    footer {
+        .footer-dev-ops {
+            .dev-ops-list {
+                justify-content: space-between;
+                order: -1;
+                width: 100%;
+                padding-left: 0;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media (max-width: 664px) {
+    footer {
+        .footer-dev-ops {
+            .dev-ops-list {
+                display: flex;
+                flex-wrap: wrap;
+                text-align: center;
+                padding-left: 0;
+                font-size: 12px;
+
+                li:first-of-type {
+                    display: none;
+                }
+            }
+
+            .dev-ops-list-person {
+                padding-left: 0;
+            }
+
+            .footer-create-year {
+                font-size: 14px;
+            }
+
+            .footer-rs-ref .footer-rs-logo {
+                width: 60px;
+            }
         }
     }
 }

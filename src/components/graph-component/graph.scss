@@ -1,19 +1,21 @@
+@import "../../assets/css/mixin.scss";
 .graph {
     width: 100%;
-    height: 25%;
-    border: 2px solid #f00bab;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     position: relative;
+    background-color: $blue;
+    overflow: hidden;
 
     .base-markup-btn-increase {
         position: absolute;
         z-index: 1100;
         width: 20px;
         height: 20px;
-        right: -2px;
-        top: -20px;
-        background: #666663;
+        right: 2px;
+        top: 2px;
+        background: $white;
         border: 1px solid #0a0a0a;
         padding: 0;
         display: flex;
@@ -21,30 +23,33 @@
         justify-content: center;
         cursor: pointer;
         outline: none;
-        opacity: 0;
         visibility: hidden;
         transition: 0.5s linear;
+
         img {
             width: 80%;
+        }
+
+        &:hover {
+            background: $lightblue;
         }
     }
 
     &:hover .base-markup-btn-increase {
-        opacity: 1;
         visibility: visible;
     }
+
     .draw-graph-switch {
         font-size: 44px;
-        background: #2c21292f;
+        background: $blue;
         border: none;
-        color: rgba(157, 163, 163, 0.637);
         width: 10%;
         cursor: pointer;
         outline: none;
         transition: 0.3s linear;
 
         &:hover {
-            background: #251c23ab;
+            background: $darkblue;
             color: rgb(207, 219, 214);
         }
     }
@@ -56,11 +61,20 @@
     .draw-graph-right {
         order: 4;
     }
+
+    .draw-graph-right,
+    .draw-graph-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .graph-wrapper-canvas {
-        width: 35%;
+        width: 100%;
         display: flex;
         justify-content: center;
         order: 2;
+
         canvas {
             display: block;
             width: 100%;
@@ -68,80 +82,89 @@
     }
 
     .draw-graph-select-coutry {
-        color: #929180;
+        color: $white;
         margin-right: 10px;
         margin-top: 10px;
         height: 20px;
         width: 20%;
         order: 3;
         outline: none;
-        background: #25252541;
-        border: 1px #0a0a0a solid;
+        background: $darkblue;
+        border: 1px $white solid;
         cursor: pointer;
+
         &::-webkit-scrollbar {
-            width: 0.56rem;
+            width: 0.2rem;
         }
+
         &::-webkit-scrollbar-track {
-            background-color: #999;
+            background-color: $white;
         }
+
         &::-webkit-scrollbar-thumb {
             height: 1.11rem;
-            background-color: #666;
+            background-color: $white;
         }
     }
 
     .draw-graph-left-select-btn {
         order: 1;
         width: 20%;
+
         .draw-graph-select {
-            color: #929180;
+            color: $white;
             margin-left: 10px;
             margin-top: 10px;
             width: 100%;
             height: 20px;
             outline: none;
-            background: #25252541;
-            border: 1px #0a0a0a solid;
+            background: $darkblue;
+            border: 1px $white solid;
 
             cursor: pointer;
         }
+
         .draw-graph-go-global-cases {
             width: 100%;
             height: 20px;
-            background: #666;
-            border: 1px solid #0a0a0a;
+            background: $white;
+            border: 1px solid $blue;
             margin-top: 10px;
             margin-left: 10px;
             outline: none;
             cursor: pointer;
 
             &:hover {
-                background-color: aliceblue;
+                background-color: $lightblue;
             }
         }
     }
 
     option {
-        background: #000000e8;
+        background: $blue;
         border: 1px #0a0a0a solid;
-
-        &:hover {
-            background: #f00bab;
-        }
     }
 }
 
 .full-screen-window {
-    position: absolute;
-    top: 5%;
-    left: 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
     margin: 0 auto;
-    width: 90%;
-    height: 90%;
-    background: #2c0f0f;
+    width: 100%;
+    height: 100%;
+    background: $blue;
     z-index: 1200;
+
     canvas {
         position: relative;
         top: 30%;
     }
+}
+
+.canvas-board {
+    position: absolute;
+    left: 50%;
+		top: 50%;
+    transform: translate(-50%, -50%);
 }
