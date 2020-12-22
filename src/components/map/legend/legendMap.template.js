@@ -1,17 +1,7 @@
 export function legendMap(parent = document.querySelector(".world-map")) {
     const legendBtn = document.createElement("button");
     legendBtn.classList.add("legendBtn");
-    legendBtn.innerHTML = `
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-`;
+    legendBtn.innerHTML = '<div class="dot"></div>'.repeat(9);
 
     const legendMapContainer = document.createElement("div");
     legendMapContainer.classList.add("legendMapContainer");
