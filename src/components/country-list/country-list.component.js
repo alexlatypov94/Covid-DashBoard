@@ -15,6 +15,7 @@ export class CountryList {
         this.dataFullCountry = undefined;
         this.data = undefined;
         this.checkDataPopulations = false;
+        this.keyboardClass = false;
     }
 
     init() {
@@ -40,8 +41,8 @@ export class CountryList {
 
     addEventListeners() {
         // custom event
-        const countryList = document.querySelector(".country-list-switch-wrapper");
-        const listWrapper = document.querySelector(".country-list-countries-wrapper");
+        const countryList = document.querySelector(".country-list-wrapper");
+        const listWrapper = document.querySelector(".country-list-wrapper");
         createGlobalClick(countryList);
         clickChooseCountry(listWrapper);
     }
@@ -51,9 +52,14 @@ export class CountryList {
 
         setInterval(() => this.chart.search(), 1000);
         const keyboardButton = document.querySelector(".country-list-keyboard");
-
+        const keyboard = document.querySelector(".keyboard")
         keyboardButton.addEventListener("click", () => {
-            document.querySelector(".keyboard--hidden") ? Keyboard.show() : Keyboard.hide();
+            !this.keyboardClass
+                ?keyboard.classList.remove("keyboard--hidden")
+                :keyboard.classList.add("keyboard--hidden");
+
+            this.keyboardClass = !this.keyboardClass
+            
         });
 
         this.chart.render(this.data, this.param);
@@ -115,14 +121,14 @@ export class CountryList {
             this.counterSwitch = 0;
             this.chart.render(this.data, this.param, this.checkDataPopulations, COLOR_PALETTE.RED);
         } else {
-            const countryListFullWrapper = document.querySelector(".country-list-wrapper");
+            const countryListFullWrapper = document.querySelector(".country-list");
             countryListFullWrapper.innerHTML = "";
             this.titleCurrentCategory = "Cases";
             this.paramNewOrTotal = "total";
             this.param = `${this.paramNewOrTotal}${this.titleCurrentCategory}`;
             this.counterSwitch = 0;
             this.checkDataPopulations = false;
-            this.initData();
+            this.init();
         }
     }
 }

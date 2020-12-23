@@ -35,8 +35,6 @@ export class GlobalTable {
             this.data = data;
             this.renderAndListen();
         });
-
-        console.log(this.data);
     }
 
     async renderAndListen(color) {

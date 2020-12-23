@@ -13,8 +13,8 @@ export function createGlobalClick(element) {
         const leftClick = left.some((selector) => e.target.classList.contains(selector)) ? "left" : undefined;
         const rightClick = right.some((selector) => e.target.classList.contains(selector)) ? "right" : undefined;
 
-        if(!leftClick && !rightClick) {
-            return
+        if (!leftClick && !rightClick) {
+            return;
         }
 
         event.detail.targetBtn = leftClick || rightClick;

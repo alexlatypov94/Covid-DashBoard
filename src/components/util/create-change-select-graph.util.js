@@ -6,9 +6,9 @@ function checkPopulation(value) {
     return false;
 }
 
-export function createChangeSelectGraph(element, data) {
+export function createChangeSelectGraph(element) {
     const event = new CustomEvent("clickChangeSelectGlobal", {
-        detail: { valueChangeForGraph: undefined, valueChangeForTable: undefined, checkPopulation: undefined, country: undefined},
+        detail: { valueChangeForGraph: undefined, valueChangeForTable: undefined, checkPopulation: undefined },
         bubbles: true,
         cancelable: true
     });
@@ -18,13 +18,12 @@ export function createChangeSelectGraph(element, data) {
         if (!selectChange) {
             return;
         }
-       
-        const valueForGraph = selectChange === "Cumulative/100" || selectChange === "Cumulative" ? "total" : "today"
-        event.detail.country = data.filter((item) => item?.country === e.target.value)[0]?.countryInfo?.iso3 || "All world"
-        console.log(event.detail.country)
-        event.detail.valueChangeForGraph = selectChange
-        event.detail.valueChangeForTable = valueForGraph
-        event.detail.checkPopulation = checkPopulation(selectChange)
+
+        event.detail.country = undefined;
+        const valueForGraph = selectChange === "Cumulative/100" || selectChange === "Cumulative" ? "total" : "today";
+        event.detail.valueChangeForGraph = selectChange;
+        event.detail.valueChangeForTable = valueForGraph;
+        event.detail.checkPopulation = checkPopulation(selectChange);
         element.dispatchEvent(event);
         e.stopImmediatePropagation();
     });

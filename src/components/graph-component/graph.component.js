@@ -1,8 +1,8 @@
 import { graphWrapperCanvas, canvasBoard, toggleForGraph, selectOptions } from "./graph.template";
-import { CovidDashboardService } from "../../core/services/covid-dashboard.service";
+import { CovidDashboardService } from "../../core/services/index";
 import { getValueCumulative, getKeys, getValueDays, initGraphType } from "./util/index";
 import { COLOR_PALETTE } from "../../core/index";
-import { createGlobalClick, createChangeSelectGraph } from "../util/index";
+import { createGlobalClick, createChangeSelectGraph, createChangeSelectCountry } from "../util/index";
 
 export class DrawGraph {
     constructor() {
@@ -12,7 +12,7 @@ export class DrawGraph {
         this.backgroundColor = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
 
-        this.dataFullCountry = [];
+        this.dataFullCountry = undefined;
 
         this.configForGraph = "Cumulative";
         this.globalOrCountry = false;
@@ -90,30 +90,12 @@ export class DrawGraph {
 
     addEventListeners() {
         const graphWrapper = document.querySelector(".graph");
-        const wrapperCanvasForRemove = document.querySelector(".graph-wrapper-canvas");
         const selectGlobalParam = document.querySelector(".draw-graph-select");
-        const selectForCountry = document.querySelector(".draw-graph-select-coutry");
-
-        graphWrapper.addEventListener("change", (event) => {
-            if (event.target.closest(".draw-graph-select-coutry")) {
-                wrapperCanvasForRemove.innerHTML = "";
-                if (event.target.value !== "All world") {
-                    this.chooseCountry = event.target.value;
-                    this.globalOrCountry = true;
-                    this.chooseApi();
-                } else {
-                    this.chooseCountry = event.target.value;
-                    this.globalOrCountry = false;
-                    this.chooseApi();
-                }
-            }
-
-            event.stopImmediatePropagation();
-        });
+        const selectForCountry = document.querySelector(".draw-graph-select-country");
 
         // custom event
         createChangeSelectGraph(selectGlobalParam);
-        createChangeSelectGraph(selectForCountry, this.dataFullCountry);
+        createChangeSelectCountry(selectForCountry, this.dataFullCountry);
         createGlobalClick(graphWrapper);
     }
 
@@ -169,7 +151,7 @@ export class DrawGraph {
     }
 
     addSelectItems() {
-        const selectCountry = document.querySelector(".draw-graph-select-coutry");
+        const selectCountry = document.querySelector(".draw-graph-select-country");
         this.dataFullCountry.forEach((el) => {
             selectCountry.insertAdjacentHTML("beforeend", selectOptions(el.country, el.countryInfo.iso3));
         });

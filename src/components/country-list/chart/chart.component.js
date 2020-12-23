@@ -14,7 +14,7 @@ export class Chart {
     }
 
     render(data, param, checkPopulations, color) {
-        this.checkPopulations = checkPopulations
+        this.checkPopulations = checkPopulations;
         const sortOfPopulation = updateDataForHundreed(data, param);
         const sortObject = !this.checkPopulations ? sortData(data, param) : sortData(sortOfPopulation, param);
         const chart = document.querySelector(".country-list-countries-wrapper");

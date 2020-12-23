@@ -7,8 +7,8 @@ export const globalTableTemplate = (categoryName, tableName, amount, color) => {
             <div class = "global-table-total-case-wrapper"></div>
             <div class = "global-table-switch-wrapper">
                 <div class="global-table-switch-wrapper arrow-buttons">
-                    <button type="button" class="global-table-btn-changes left-change arrow-btn">
-                    <svg width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    <button type="button" class="global-table-btn-changes global-table-left-change arrow-btn">
+                    <svg class="global-table-btn-changes global-table-left-change svg-arrow" width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g transform="translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)">
                         <polygon class="arrow-6-pl"
@@ -24,8 +24,8 @@ export const globalTableTemplate = (categoryName, tableName, amount, color) => {
                     </svg>
                     </button>
                     <span class="global-table-title-current-category">${categoryName}</span>
-                    <button type="button" class="global-table-btn-changes right-change arrow-btn">
-                    <svg width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    <button type="button" class="global-table-btn-changes global-table-right-change arrow-btn">
+                    <svg class="global-table-btn-changes global-table-right-change svg-arrow" width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g>
                         <polygon class="arrow-6-pl"

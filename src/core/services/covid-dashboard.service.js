@@ -96,14 +96,14 @@ export class CovidDashboardService {
             });
         });
     }
-    
+
     getApiGlobalForGraph() {
         return this.apiService.getApiIntensityCases().then((res) => {
             return {
                 totalCases: res?.cases,
                 totalDeaths: res?.deaths,
                 totalRecovered: res?.recovered
-            }
+            };
         });
     }
 
@@ -112,8 +112,8 @@ export class CovidDashboardService {
             return {
                 totalCases: res?.timeline?.cases,
                 totalDeaths: res?.timeline?.deaths,
-                totalRecovered: res?.timeline?.recovered,
-            }
+                totalRecovered: res?.timeline?.recovered
+            };
         });
     }
 }

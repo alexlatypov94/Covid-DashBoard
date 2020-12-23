@@ -13,6 +13,3 @@ export function mapComponent(parent) {
     parent.insertAdjacentHTML("beforeend", mapButtons);
     return parent.append(element);
 }
-{/* <li><button class="mapButtons__item" data-value="cases">Cumulative Cases</button></li>
-        <li><button class="mapButtons__item" data-value="recovered">Recovered</button></li>
-        <li><button class="mapButtons__item" data-value="death">Death</button></li> */}

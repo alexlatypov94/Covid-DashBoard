@@ -4,18 +4,17 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    position: relative;
     background-color: $blue;
     overflow: hidden;
 
     .base-markup-btn-increase {
         position: absolute;
-        z-index: 1100;
+        z-index: 1200;
         width: 20px;
         height: 20px;
-        right: 2px;
-        top: 2px;
-        background: $white;
+        left: 50%;
+        top: 70%;
+        background:#317174;
         border: 1px solid #0a0a0a;
         padding: 0;
         display: flex;
@@ -25,6 +24,7 @@
         outline: none;
         visibility: hidden;
         transition: 0.5s linear;
+        background-image: url(../../assets/img/full-screen.svg);
 
         img {
             width: 80%;
@@ -32,10 +32,12 @@
 
         &:hover {
             background: $lightblue;
+            background-image: url(../../assets/img/full-screen.svg);
         }
     }
 
     &:hover .base-markup-btn-increase {
+        opacity: 1;
         visibility: visible;
     }
 
@@ -69,6 +71,10 @@
         justify-content: center;
     }
 
+    .svg-arrow {
+        width: 20px;
+    }
+
     .graph-wrapper-canvas {
         width: 100%;
         display: flex;
@@ -81,7 +87,7 @@
         }
     }
 
-    .draw-graph-select-coutry {
+    .draw-graph-select-country {
         color: $white;
         margin-right: 10px;
         margin-top: 10px;
@@ -145,18 +151,3 @@
         border: 1px #0a0a0a solid;
     }
 }
-
-// .full-screen-window {
-//     position: absolute;
-//     top: 5%;
-//     left: 5%;
-//     margin: 0 auto;
-//     width: 90%;
-//     height: 90%;
-    background: $blue;
-//     z-index: 1200;
-//     canvas {
-//         position: relative;
-//         top: 30%;
-//     }
-// }
