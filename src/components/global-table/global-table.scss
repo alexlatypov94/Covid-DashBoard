@@ -62,7 +62,8 @@ $global-table-stat-color: #ebcbcb;
     }
 
     .global-table {
-        width: 100%;
+				width: 100%;
+				height: 100%;
         display: flex;
         flex-direction: column;
 				overflow: hidden;
@@ -113,6 +114,7 @@ $global-table-stat-color: #ebcbcb;
         }
 
         .global-table-total-case-wrapper {
+					height: 100%;
             overflow: scroll;
             overflow-x: hidden;
             background-color: $blue;
