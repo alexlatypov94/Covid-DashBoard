@@ -52,14 +52,13 @@ export class CountryList {
 
         setInterval(() => this.chart.search(), 1000);
         const keyboardButton = document.querySelector(".country-list-keyboard");
-        const keyboard = document.querySelector(".keyboard")
+        const keyboard = document.querySelector(".keyboard");
         keyboardButton.addEventListener("click", () => {
             !this.keyboardClass
-                ?keyboard.classList.remove("keyboard--hidden")
-                :keyboard.classList.add("keyboard--hidden");
+                ? keyboard.classList.remove("keyboard--hidden")
+                : keyboard.classList.add("keyboard--hidden");
 
-            this.keyboardClass = !this.keyboardClass
-            
+            this.keyboardClass = !this.keyboardClass;
         });
 
         this.chart.render(this.data, this.param);
