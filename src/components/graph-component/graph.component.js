@@ -33,6 +33,7 @@ export class DrawGraph {
     }
 
     initData() {
+        this.chooseCountry === undefined;
         this.service.getFullInformationCountry().then((dataCountry) => {
             this.dataFullCountry = dataCountry;
 
@@ -69,7 +70,13 @@ export class DrawGraph {
             this.label = "Data is no founded";
         }
 
-        this.population = this.dataFullCountry?.reduce((acc, curr) => acc + curr.population, 0);
+        if (this.chooseCountry === undefined) {
+            this.population = this.dataFullCountry?.reduce((acc, curr) => acc + curr.population, 0);
+        } else {
+            this.population = this.dataFullCountry
+                ?.filter((item) => item.country === this.chooseCountry)
+                .reduce((acc, curr) => acc + curr.population, 0);
+        }
 
         if (this.configForGraph === "Cumulative" || this.configForGraph === "Cumulative/100") {
             const dataObject = !this.populationDivision

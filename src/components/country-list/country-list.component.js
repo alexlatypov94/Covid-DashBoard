@@ -62,6 +62,10 @@ export class CountryList {
         });
 
         this.chart.render(this.data, this.param);
+        const searchField = document.querySelector(".country-list-country-input");
+        searchField.addEventListener("input", () => {
+            this.chart.render(this.dataFullCountry, this.param);
+        });
     }
 
     onSwitchCountryList(switchPos) {
