@@ -122,13 +122,13 @@ footer {
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     cursor: pointer;
     outline: none;
     opacity: 0;
     visibility: hidden;
-    transition: 0.5s linear;
-    background-image: url(../img/full-screen.svg);
+		transition: 0.5s linear;
+		background-image: url(../img/full-screen.svg);
     &:hover {
             background: $lightblue;
             background-image: url(../../assets/img/full-screen.svg);
@@ -196,12 +196,11 @@ footer {
 }
 
 .full-screen-window {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    margin: 0 auto;
-    width: 93vw;
-    height: 60vw;
+    width:  100%;
+    height: 100%;
     background: #2c0f0f;
     z-index: 1200;
     canvas {
@@ -211,20 +210,15 @@ footer {
 }
 
 .world-map.full-screen-window {
-    position: absolute;
-    width: 75vw;
-    left: 10%;
-}
-
-.country-list.full-screen-window {
-    left: -405%;
-}
+	 width: 100vw;
+	 padding: 5% 25% 20% 25%;
+		position: fixed;
+	}
 
 .graph.full-screen-window {
-    z-index: 1400;
+	position: fixed;
     top: 0;
-    height: 724px;
-    width: 95vw;
+    left: 0;
 
     .graph-wrapper-canvas {
         height: 400px;
@@ -238,7 +232,6 @@ footer {
 // ---------------------left-and-right-btn-----------
 
 .arrow-buttons {
-    // width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -260,7 +253,8 @@ footer {
     height: auto;
     margin: 0 0.5rem;
     cursor: pointer;
-    overflow: visible;
+		overflow: visible;
+		pointer-events: none ;
 }
 
 .arrow-btn svg polygon,
@@ -330,7 +324,6 @@ footer {
 
         .country-list {
             grid-area: country;
-            // height: 85vh;
         }
 
         .wrapper-for-map {
