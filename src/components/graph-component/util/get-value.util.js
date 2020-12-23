@@ -19,8 +19,7 @@ export function getKeys(obj, param) {
 export function getValueDays(obj, population) {
     if (!population) {
         return Object.values(obj || { error: "error" })
-            .map((item, index, arr) => item - (arr[index - 1] || 0))
-            .filter((el) => el > 0);
+            .map((item, index, arr) => item - (arr[index - 1] || 0));
     }
 
     if (!obj) {
