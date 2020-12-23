@@ -10,7 +10,7 @@ export const canvasBoard = `
 
 export const toggleForGraph = `
     <button class = "draw-graph-switch draw-graph-left arrow-btn">
-    <svg width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <svg class = "draw-graph-switch draw-graph-left svg-arrow" width="18px" height="27px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
         <g transform="translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)">
         <polygon class="arrow-6-pl"
@@ -25,18 +25,20 @@ export const toggleForGraph = `
         </g>
     </svg>
     </button>
-    <select class = "draw-graph-select-coutry">
-        <option class = "draw-graph-choose-county"class = "draw-graph-choose-county">All world</option>
+    <select class = "draw-graph-select-country">
+        <option class = "draw-graph-choose-county">All world</option>
     </select>
     <div class = "draw-graph-left-select-btn">
     <select class = "draw-graph-select">
         <option class = "draw-graph-general">Cumulative</option>
         <option class = "draw-graph-general">Day</option>
+        <option class = "draw-graph-general">Cumulative/100</option>
+        <option class = "draw-graph-general">Day/100</option>
     </select>
     </div>
     
     <button class = "draw-graph-switch draw-graph-right arrow-btn">
-    <svg width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <svg class = "draw-graph-switch draw-graph-right svg-arrow" width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
         <g>
         <polygon class="arrow-6-pl"

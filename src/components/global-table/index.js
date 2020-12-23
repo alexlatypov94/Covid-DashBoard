@@ -1,1 +1,1 @@
-export * from "./global-table.component"
+export * from "./global-table.component";

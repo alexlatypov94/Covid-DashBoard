@@ -1,6 +1,7 @@
 import { CovidDashboardService, COLOR_PALETTE } from "../../core/index";
 import { sortData, updateDataForHundreed, getGlobalDivision } from "./utils/index";
 import { globalTableTemplate, totalCaseWrapperTemplate, radioButton } from "./global-table.template";
+import { createGlobalClick, createClickRadio, clickChooseCountry } from "../util/index";
 
 export class GlobalTable {
     constructor() {
@@ -17,24 +18,34 @@ export class GlobalTable {
         this.titleCurrentCategory = "Cases";
 
         this.checkDataPopulations = false;
+        this.amount = undefined;
+        this.dataFullCountry = undefined;
+        this.data = undefined;
     }
 
     init() {
         const table = document.querySelector(".table");
         table.insertAdjacentHTML("beforeend", radioButton);
-
-        this.service.getFullInformationCountry().then((data) => this.renderAndListen(data));
+        this.initData();
     }
 
-    async renderAndListen(data, color) {
-        await this.render(data, color);
-        this.addEventListeners(data);
+    initData() {
+        this.service.getFullInformationCountry().then((data) => {
+            this.dataFullCountry = data;
+            this.data = data;
+            this.renderAndListen();
+        });
     }
 
-    render(data, color) {
-        const sortOfPopulation = updateDataForHundreed(data, this.param);
+    async renderAndListen(color) {
+        await this.render(color);
+        this.addEventListeners();
+    }
+
+    render(color) {
+        const sortOfPopulation = updateDataForHundreed(this.data, this.param);
         const sortObject = !this.checkDataPopulations
-            ? sortData(data, this.param)
+            ? sortData(this.data, this.param)
             : sortData(sortOfPopulation, this.param);
 
         const globalTable = document.querySelector(".global-table");
@@ -42,7 +53,7 @@ export class GlobalTable {
         const tableName = `Global ${this.titleCurrentCategory}`;
         const globalAmount = !this.checkDataPopulations
             ? Number(sortObject.reduce((acc, curr) => acc + curr[this.param], 0).toFixed(3))
-            : getGlobalDivision(data, this.param);
+            : getGlobalDivision(this.data, this.param);
 
         globalTable.innerHTML = "";
         globalTable.insertAdjacentHTML(
@@ -52,46 +63,40 @@ export class GlobalTable {
 
         const dataWrapper = document.querySelector(".global-table-total-case-wrapper");
 
-        sortObject.forEach((element) => {
+        sortObject?.forEach((element) => {
             dataWrapper.insertAdjacentHTML(
                 "beforeend",
                 totalCaseWrapperTemplate(
                     color || this.totalConfirmed,
                     element?.[this.param],
                     this.titleForCases,
-                    element?.country
+                    element?.country,
+                    element?.countryInfo?.iso3
                 )
             );
         });
 
-        return data;
+        this.amount = document.querySelector(".global-table-amount-global-case");
     }
 
-    addEventListeners(data) {
-        const table = document.querySelector(".table");
-        const amount = document.querySelector(".global-table-amount-global-case");
-
-        table.addEventListener("click", (event) => {
-            event.stopImmediatePropagation();
-
-            const isSwithOnStatistics = event.target.closest(".global-table-btn-changes") !== null;
-            const isRadioButtonClick = event.target.closest("label") !== null;
-
-            if (isSwithOnStatistics || isRadioButtonClick) {
-                isSwithOnStatistics
-                    ? this.onSwithStatistics(event, data, amount)
-                    : this.onRadioButtonClick(event, data, amount);
-            }
-        });
+    addEventListeners() {
+        const globalTableSwtichs = document.querySelector(".global-table-switch-wrapper");
+        const radioWrapper = document.querySelector(".global-table-checkbox-wrapper");
+        const tableWrapper = document.querySelector(".global-table-total-case-wrapper");
+        createClickRadio(radioWrapper);
+        createGlobalClick(globalTableSwtichs);
+        clickChooseCountry(tableWrapper);
     }
 
-    onSwithStatistics(event, data, amount) {
-        let counter = event.target.closest(".left-change") ? this.counterForSwitch - 1 : this.counterForSwitch + 1;
+    onSwithStatistics(switchPos) {
+        let counter = switchPos === "left" ? this.counterForSwitch - 1 : this.counterForSwitch + 1;
 
-        /* The switch button has three positions:
-            1. 0 this is Cases position
-            2. 1 this is Deaths position
-            3. 2 this is Recovered position */
+        /**
+         * The switch button has three positions:
+         *  1. 0 this is Cases position
+         *  2. 1 this is Deaths position
+         *  3. 2 this is Recovered position
+         */
 
         if (counter > 2) {
             counter = 0;
@@ -101,64 +106,54 @@ export class GlobalTable {
 
         switch (counter) {
             case 0:
-                this.onChangeParametersSwitch(COLOR_PALETTE.RED, "Cases", amount);
-                this.renderAndListen(data, this.totalConfirmed);
+                this.onChangeParametersSwitch(COLOR_PALETTE.RED, "Cases");
+                this.renderAndListen(this.totalConfirmed);
                 break;
             case 1:
-                this.onChangeParametersSwitch(COLOR_PALETTE.GREY, "Deaths", amount);
-                this.renderAndListen(data, this.totalDeath);
+                this.onChangeParametersSwitch(COLOR_PALETTE.GREY, "Deaths");
+                this.renderAndListen(this.totalDeath);
                 break;
             default:
-                this.onChangeParametersSwitch(COLOR_PALETTE.GREEN, "Recovered", amount);
-                this.renderAndListen(data, this.totalRecovered);
+                this.onChangeParametersSwitch(COLOR_PALETTE.GREEN, "Recovered");
+                this.renderAndListen(this.totalRecovered);
                 break;
         }
 
         this.counterForSwitch = counter;
     }
 
-    onRadioButtonClick(event, data, amount) {
-        const newAmount = amount;
-        const dataAttribute = event.target.getAttribute("data-attribute");
-        newAmount.style.color = COLOR_PALETTE.RED;
+    onRadioButtonClick(paramDate, checkPopulation) {
+        this.amount.style.color = COLOR_PALETTE.RED;
         this.counterForSwitch = 0;
         this.titleForCases = "Cases";
         this.titleCurrentCategory = "Cases";
-
-        switch (dataAttribute) {
-            case "total":
-                this.onChangeParametersRadio("total");
-                this.checkDataPopulations = false;
-                this.renderAndListen(data, this.totalConfirmed);
-                break;
-            case "new":
-                this.onChangeParametersRadio("today");
-                this.checkDataPopulations = false;
-                this.renderAndListen(data, this.totalConfirmed);
-                break;
-            case "general-hundreed":
-                this.onChangeParametersRadio("total");
-                this.checkDataPopulations = true;
-                this.renderAndListen(data, this.totalConfirmed);
-                break;
-            default:
-                this.onChangeParametersRadio("today");
-                this.checkDataPopulations = true;
-                this.renderAndListen(data, this.totalConfirmed);
-                break;
-        }
-    }
-
-    onChangeParametersRadio(paramDate) {
         this.paramNewOrTotal = paramDate;
         this.param = `${this.paramNewOrTotal}Cases`;
+        this.checkDataPopulations = checkPopulation;
+        this.renderAndListen(this.totalConfirmed);
     }
 
-    onChangeParametersSwitch(colorTitle, wordCategory, amount) {
-        const newAmount = amount;
-        newAmount.style.color = colorTitle;
+    onChangeParametersSwitch(colorTitle, wordCategory) {
+        this.amount.style.color = colorTitle;
         this.titleCurrentCategory = wordCategory;
         this.param = `${this.paramNewOrTotal}${wordCategory}`;
         this.titleForCases = wordCategory;
+    }
+
+    onChooseCountry(country, checkClick) {
+        // console.log(checkClick)
+        if (!checkClick) {
+            this.data = this.dataFullCountry.filter((item) => item.countryInfo.iso3 === country);
+            this.counterForSwitch = 0;
+            this.renderAndListen(this.totalConfirmed);
+        } else {
+            this.paramNewOrTotal = "total";
+            this.param = `${this.paramNewOrTotal}Cases`;
+            this.counterForSwitch = 0;
+            this.titleForCases = "Cases";
+            this.titleCurrentCategory = "Cases";
+            this.checkDataPopulations = false;
+            this.initData();
+        }
     }
 }

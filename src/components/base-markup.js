@@ -9,21 +9,27 @@ export class BaseMarkup {
         </header>
         <main>
         <div class = "wrapper">
-            <div class = "country-list"></div>
+            <div class = "country-list">
+                <button class = "base-markup-btn-increase"></button>
+            </div>
             <div class = "wrapper-for-map">
-                <div class = "world-map"></div>
+                <div class = "world-map">
+                    <button class = "base-markup-btn-increase"></button>
+                </div>
                 <div class = "graph">
-                    <button class = "base-markup-btn-increase"><img src = "../assets/img/full-screen.svg"></button>
+                    <button class = "base-markup-btn-increase"></button>
                 </div>
             </div>
-            <div class = "table"></div>
+            <div class = "table">
+                <button class = "base-markup-btn-increase"></button>
+            </div>
         </div>
         </main>
         <footer>
             <div class = "footer-dev-ops">
                 <ul class = "dev-ops-list">
                     <li class = "dev-ops-list-person">Developers: </li>
-                    <li class = "dev-ops-list-person"><a href = "https://github.com/alexlatypov94" class = "dev-ops-ref"><img class = "footer-github-logo" src = "assets/img/github.svg"><p>Aliaksei Latypay</p></a></li>
+                    <li class = "dev-ops-list-person"><a href = "https://github.com/alexlatypov94" class = "dev-ops-ref"><img class = "footer-github-logo" src = "assets/img/github.svg"><p>Aliaksei Latypau</p></a></li>
                     <li class = "dev-ops-list-person"><a href = "https://github.com/dubichtonya" class = "dev-ops-ref"><img class = "footer-github-logo" src = "assets/img/github.svg"><p>Antonina Dubich</p></a></li>
                     <li class = "dev-ops-list-person"><a href = "https://github.com/nimlu-bot" class = "dev-ops-ref"><img class = "footer-github-logo" src = "assets/img/github.svg"><p>Sergey Nesterov</p></a></li>
                 </ul>

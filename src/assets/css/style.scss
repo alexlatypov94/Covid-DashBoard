@@ -110,6 +110,31 @@ footer {
     }
 }
 
+.base-markup-btn-increase {
+    position: absolute;
+    z-index: 1100;
+    width: 20px;
+    height: 20px;
+    right: -2px;
+    top: -20px;
+    background: #317174;
+    border: 1px solid #0a0a0a;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s linear;
+    background-image: url(../img/full-screen.svg);
+    &:hover {
+            background: $lightblue;
+            background-image: url(../../assets/img/full-screen.svg);
+        }
+}
+
 .wrapper {
     box-sizing: border-box;
     display: grid;
@@ -121,9 +146,19 @@ footer {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 
     .country-list {
         grid-area: country;
+
+        .base-markup-btn-increase {
+            top: 0;
+        }
+
+        &:hover .base-markup-btn-increase {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 
     .wrapper-for-map {
@@ -134,15 +169,72 @@ footer {
         grid-template-rows: 70% 30%;
 
         .world-map {
-            width: 100%;
+            .base-markup-btn-increase {
+                top: 0;
+                left: 50%;
+            }
+
+            &:hover .base-markup-btn-increase {
+                opacity: 1;
+                visibility: visible;
+            }
         }
     }
 
     .table {
+        .base-markup-btn-increase {
+            top: 0;
+            left: 0;
+        }
+
+        &:hover .base-markup-btn-increase {
+            opacity: 1;
+            visibility: visible;
+        }
         grid-area: table;
     }
 }
 
+.full-screen-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 93vw;
+    height: 60vw;
+    background: #2c0f0f;
+    z-index: 1200;
+    canvas {
+        position: relative;
+        top: 30%;
+    }
+}
+
+.world-map.full-screen-window {
+    position: absolute;
+    width: 75vw;
+    left: 10%;
+}
+
+.country-list.full-screen-window {
+    left: -405%;
+}
+
+.graph.full-screen-window {
+    z-index: 1400;
+    top: 0;
+    height: 724px;
+    width: 95vw;
+
+    .graph-wrapper-canvas {
+        height: 400px;
+        width: 400px;
+    }
+
+    .base-markup-btn-increase {
+        top: 0;
+    }
+}
 // ---------------------left-and-right-btn-----------
 
 .arrow-buttons {

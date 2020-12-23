@@ -32,8 +32,8 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                             maxTicksLimit: 5,
                             fontSize: 12,
 
-                            callback: function (value) {
-                                const newValue = value.toString().length > 4 ? `${value / 10e5}M` : value;
+                            "callback": function (value) {
+                                const newValue = value.toString().length > 4 ? `${(value / 10e5)}M` : value;
 
                                 return newValue;
                             }
@@ -47,7 +47,7 @@ export function initGraphType(graphCanvas, typeGraph, labelData, dataArray, bgCo
                         ticks: {
                             maxTicksLimit: 11,
                             fontSize: 12,
-                            callback: function (value) {
+                            "callback": function (value) {
                                 const month = [
                                     "Jan",
                                     "Feb",

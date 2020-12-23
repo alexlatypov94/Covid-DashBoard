@@ -3,8 +3,9 @@ import "./country-list.component.scss";
 export const countryListTemplate = `
 <div class = "country-list-wrapper">
   <div class="country-list-switch-wrapper arrow-buttons">
-    <button type = "button"  class="country-list-btn-changes left-change arrow-btn">
-      <svg width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <button type = "button"  class="country-list-btn-changes country-list-left-change arrow-btn">
+      <svg  class="country-list-btn-changes country-list-left-change svg-arrow" width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <svg  width="18px" height="17px" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
         <g transform="translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)">
           <polygon class="arrow-6-pl"
@@ -20,8 +21,8 @@ export const countryListTemplate = `
       </svg>
     </button>
     <span class = "country-list-swich-title">Cases</span>
-    <button type = "button"  class="country-list-btn-changes right-change arrow-btn">
-      <svg width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <button type = "button"  class="country-list-btn-changes country-list-right-change arrow-btn">
+      <svg  class="country-list-btn-changes country-list-right-change svg-arrow" width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
         <g>
           <polygon class="arrow-6-pl"

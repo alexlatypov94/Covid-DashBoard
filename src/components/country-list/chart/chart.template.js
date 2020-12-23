@@ -8,12 +8,12 @@ export const chartTemplate = (lastUpdate) => {
 </div>
 `;
 };
-export const countryTemplate = (countryCode, countryFlag, country, value) => {
+export const countryTemplate = (countryCode, countryFlag, country, value, color) => {
     return `
-<li class ="country-list-country-wrapper" data-country ="${countryCode}">
+<li class ="country-list-country-wrapper" data-country ="${countryCode}" data-countryFull = "${country}">
 	<span><img class="country-list-flag" src="${countryFlag}"></span>
 	<span class="country-list-country-name" data-country-name ="${country}">${country}</span>
-	<div class="country-list-value ">${value}</div>
+	<div class="country-list-value" style = "color: ${color}">${value}</div>
 </li>
 `;
 };

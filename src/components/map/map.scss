@@ -52,8 +52,10 @@ span[data-color="green"] {
     position: absolute;
     bottom: 100%;
     width: 16em;
+
     font-size: 1.3em;
     padding: 1em;
+
     background-color: $lightblue;
     border-radius: 0.4em;
     margin-bottom: 1em;
@@ -67,6 +69,7 @@ span[data-color="green"] {
         content: "";
         width: 1.4em;
         height: 1.4em;
+
         background-color: $lightblue;
         transform: rotate(45deg);
         margin-left: -0.7em;
@@ -82,26 +85,27 @@ span[data-color="green"] {
 .mapButtons {
     width: 100%;
     position: absolute;
+
     bottom: 0px;
     left: 0;
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
     z-index: 1100;
     list-style: none;
 
-    li {
-        width: 25%;
+    button {
+        display: block;
+        padding: 5px;
 
-        button {
-            display: block;
-            padding: 5px;
-            width: 100%;
-            cursor: pointer;
-            height: 100%;
+        width: 30px;
+        cursor: pointer;
 
-            @include main-btn-style;
-        }
+        height: 100%;
+        outline: none;
+
+        @include main-btn-style;
     }
 }
 
