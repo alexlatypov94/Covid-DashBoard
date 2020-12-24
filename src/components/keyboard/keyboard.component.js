@@ -100,6 +100,9 @@ export const Keyboard = {
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        const input = document.querySelector(".use-keyboard-input");
+                        input.value = this.properties.value;
+
                         this.triggerEvent("oninput");
                         playAydio("../../assets/audio/click.mp3");
                     });
@@ -123,6 +126,8 @@ export const Keyboard = {
                     keyElement.innerHTML = createIconHTML("space_bar");
 
                     keyElement.addEventListener("click", () => {
+                        const input = document.querySelector(".use-keyboard-input");
+                        input.value += " ";
                         this.properties.value += " ";
                         this.triggerEvent("oninput");
                         playAydio("../../assets/audio/click.mp3");
@@ -134,7 +139,9 @@ export const Keyboard = {
                     keyElement.textContent = key.toLowerCase();
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        this.properties.value += key.toLowerCase();
+                        const input = document.querySelector(".use-keyboard-input");
+                        input.value += key.toLowerCase();
                         this.triggerEvent("oninput");
                         playAydio("../../assets/audio/click.mp3");
                     });
@@ -153,11 +160,11 @@ export const Keyboard = {
     },
 
     triggerEvent(handlerName) {
-        const input = document.querySelector(".use-keyboard-input");
+        // const input = document.querySelector(".use-keyboard-input");
         if (typeof this.eventHandlers[handlerName] === "function") {
             this.eventHandlers[handlerName](this.properties.value);
         }
-        input.focus();
+        // input.focus();
     },
 
     open(initialValue, oninput, onclose) {
