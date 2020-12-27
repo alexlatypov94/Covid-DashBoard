@@ -55,19 +55,18 @@ $global-table-stat-color: #ebcbcb;
                 cursor: pointer;
             }
 
-            .global-table-radio-btn:checked+.global-table-style-radio-btn {
+            .global-table-radio-btn:checked + .global-table-style-radio-btn {
                 background-color: $red;
             }
         }
     }
 
     .global-table {
-				width: 100%;
-				height: 100%;
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
-				overflow: hidden;
-				
+        overflow: hidden;
 
         .global-table-title {
             @include large-size;
@@ -91,7 +90,6 @@ $global-table-stat-color: #ebcbcb;
         }
 
         .global-table-switch-wrapper {
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -114,7 +112,7 @@ $global-table-stat-color: #ebcbcb;
         }
 
         .global-table-total-case-wrapper {
-					height: 100%;
+            height: 100%;
             overflow: scroll;
             overflow-x: hidden;
             background-color: $blue;

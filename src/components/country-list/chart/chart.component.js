@@ -1,5 +1,5 @@
 import { chartTemplate, countryTemplate } from "./chart.template";
-import { sortData, updateDataForHundreed } from "../../global-table/utils/index";
+import { sortData, updateDataForHundreed } from "../../util/index";
 
 export class Chart {
     constructor() {

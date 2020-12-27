@@ -1,7 +1,6 @@
 import { graphWrapperCanvas, canvasBoard, toggleForGraph, selectOptions } from "./graph.template";
-import { CovidDashboardService } from "../../core/services/index";
 import { getValueCumulative, getKeys, getValueDays, initGraphType } from "./util/index";
-import { COLOR_PALETTE } from "../../core/index";
+import { COLOR_PALETTE, CovidDashboardService } from "../../core/index";
 import { createGlobalClick, createChangeSelectGraph, createChangeSelectCountry } from "../util/index";
 
 export class DrawGraph {
@@ -66,7 +65,7 @@ export class DrawGraph {
         const graphCanvas = document.querySelector(".canvas-board").getContext("2d");
         const labels = getKeys(this.data, this.keyObj);
 
-        if (labels[0] === "error") {
+        if (!labels.length) {
             this.label = "Data is no founded";
         }
 

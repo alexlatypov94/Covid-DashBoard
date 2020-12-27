@@ -1,32 +1,24 @@
 import "./assets/css/style.scss";
-import { BaseMarkup, GlobalTable, CountryList, MapCovied, legendMapHandler, DrawGraph } from "./components/index";
+import { GlobalTable, CountryList, MapCovied, legendMapHandler, DrawGraph } from "./components/index";
 
-const markup = new BaseMarkup();
 const globalTable = new GlobalTable();
 const graph = new DrawGraph();
 const countryList = new CountryList();
 const mapCovied = new MapCovied();
 
-markup.init();
 globalTable.init();
 graph.init();
 countryList.init();
 mapCovied.init();
 legendMapHandler();
 
-/* Counter for full size */
-
-let btnFullSizeClick = false;
+let btnFullSizeClick = true;
 function changeRadioBtnCheckedAttribute(valueChangeForTable) {
     const arrayForCheck = ["Cumulative", "Day", "Cumulative/100", "Day/100"];
     const radio = document.querySelectorAll(".global-table-radio-btn");
     const indexCheck = arrayForCheck.indexOf(valueChangeForTable);
     radio[indexCheck].setAttribute("checked", "checked");
 }
-
-/**
- * Global controller
- */
 
 const bodyEl = document.querySelector("body");
 
@@ -39,26 +31,15 @@ function globalEventHandler(event) {
 }
 bodyEl.addEventListener("globalClickEvent", globalEventHandler);
 
-/**
- * Full Screen
- * And
- */
-
 function addClassFullSreenAndRadio(e) {
     if (e.target.closest(".base-markup-btn-increase")) {
-        !btnFullSizeClick
-            ? e.target.parentNode.classList.add("full-screen-window")
-            : e.target.parentNode.classList.remove("full-screen-window");
+        e.target.parentNode.classList.toggle("full-screen-window", btnFullSizeClick)
 
         btnFullSizeClick = !btnFullSizeClick;
     }
 }
 
 bodyEl.addEventListener("click", addClassFullSreenAndRadio);
-
-/**
- * Radio Button
- */
 
 function hundlerRadioButton(e) {
     const paramNewOrTotal = e?.detail?.paramNewOrTotal;
@@ -76,10 +57,6 @@ function hundlerRadioButton(e) {
 }
 
 bodyEl.addEventListener("clickRadioBtn", hundlerRadioButton);
-
-/**
- * change selector global data
- */
 
 function hundlerSelectGlobalGraph(e) {
     const valueChangeForGraph = e?.detail?.valueChangeForGraph;

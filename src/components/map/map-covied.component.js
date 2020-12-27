@@ -2,8 +2,7 @@ import * as L from "leaflet";
 import { mapComponent } from "./map.template";
 import { CovidDashboardService } from "../../core/index";
 import { legendMapHandler } from "./legend/index";
-import { clickChooseCountry, createGlobalClick } from "../util/index";
-import { updateDataForHundreed, sortData } from "../global-table/utils/sort-data.util"
+import { clickChooseCountry, createGlobalClick, updateDataForHundreed, sortData } from "../util/index";
 
 export class MapCovied {
     constructor() {

@@ -2,8 +2,6 @@
 @import "./chart/chart.scss";
 
 .country-list {
-    // position: relative;
-
     .country-list-keyboard {
         width: 36px;
         height: 22px;
@@ -41,8 +39,7 @@
     background-color: transparent;
     color: white;
     border: none;
-		font-size: 20px;
-		
+    font-size: 20px;
 }
 
 .country-list-title {
@@ -54,4 +51,3 @@
     margin-right: 5px;
     font-size: 16px;
 }
- 

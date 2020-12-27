@@ -160,11 +160,9 @@ export const Keyboard = {
     },
 
     triggerEvent(handlerName) {
-        // const input = document.querySelector(".use-keyboard-input");
         if (typeof this.eventHandlers[handlerName] === "function") {
             this.eventHandlers[handlerName](this.properties.value);
         }
-        // input.focus();
     },
 
     open(initialValue, oninput, onclose) {

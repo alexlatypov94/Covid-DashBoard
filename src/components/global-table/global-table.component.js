@@ -1,7 +1,6 @@
 import { CovidDashboardService, COLOR_PALETTE } from "../../core/index";
-import { sortData, updateDataForHundreed, getGlobalDivision } from "./utils/index";
 import { globalTableTemplate, totalCaseWrapperTemplate, radioButton } from "./global-table.template";
-import { createGlobalClick, createClickRadio, clickChooseCountry } from "../util/index";
+import { createGlobalClick, createClickRadio, clickChooseCountry, sortData, updateDataForHundreed, getGlobalDivision } from "../util/index";
 
 export class GlobalTable {
     constructor() {
@@ -141,7 +140,6 @@ export class GlobalTable {
     }
 
     onChooseCountry(country, checkClick) {
-        // console.log(checkClick)
         if (!checkClick) {
             this.data = this.dataFullCountry.filter((item) => item.countryInfo.iso3 === country);
             this.counterForSwitch = 0;

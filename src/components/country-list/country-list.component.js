@@ -8,6 +8,7 @@ export class CountryList {
     constructor() {
         this.chart = new Chart();
         this.service = new CovidDashboardService();
+        this.keyboard = Keyboard;
         this.titleCurrentCategory = "Cases";
         this.paramNewOrTotal = "total";
         this.param = `${this.paramNewOrTotal}${this.titleCurrentCategory}`;
@@ -23,7 +24,7 @@ export class CountryList {
         list.insertAdjacentHTML("beforeend", countryListTemplate);
 
         this.initData();
-        Keyboard.init();
+        this.keyboard.init();
     }
 
     initData() {
@@ -42,9 +43,8 @@ export class CountryList {
     addEventListeners() {
         // custom event
         const countryList = document.querySelector(".country-list-wrapper");
-        const listWrapper = document.querySelector(".country-list-wrapper");
         createGlobalClick(countryList);
-        clickChooseCountry(listWrapper);
+        clickChooseCountry(countryList);
     }
 
     render() {
@@ -54,10 +54,7 @@ export class CountryList {
         const keyboardButton = document.querySelector(".country-list-keyboard");
         const keyboard = document.querySelector(".keyboard");
         keyboardButton.addEventListener("click", () => {
-            !this.keyboardClass
-                ? keyboard.classList.remove("keyboard--hidden")
-                : keyboard.classList.add("keyboard--hidden");
-
+            keyboard.classList.toggle("keyboard--hidden", this.keyboardClass )
             this.keyboardClass = !this.keyboardClass;
         });
 

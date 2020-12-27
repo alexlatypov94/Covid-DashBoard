@@ -1,7 +1,9 @@
-const CountryList = require("./country-list.component");
+import { CountryList } from "./country-list.component";
+
+const countryList = new CountryList()
 
 describe("CountryList ", () => {
     test("shoud be defined", () => {
-        expect(CountryList).toBeDefined();
+        expect(countryList).toBeDefined();
     });
 });
